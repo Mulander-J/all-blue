@@ -1,131 +1,447 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import PhoneColor from '../components/phoneColor/PhoneColor.vue';
 
-<Meta title="Practice/A01" />
+<Meta title="Practice/A01" component={PhoneColor} argTypes={{
+      main: { control: 'color' },
+      side: { control: 'color' },
+      cam: { control: 'color' },
+      camRing: { control: 'color' },
+      logo: { control: 'color' },
+      animateSpeed: { control: { type: 'range', min: 6, max: 24} },
+}} />
 
-<style>{`
-  .subheading {
-    --mediumdark: '#999999';
-    font-weight: 900;
-    font-size: 13px;
-    color: #999;
-    letter-spacing: 6px;
-    line-height: 24px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    margin-top: 40px;
-  }
+export const Template = (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    components: { PhoneColor },
+    template: '<phone-color v-bind="$props" />',
+})
 
-  .link-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    row-gap: 10px;
-  }
+# iPhone12纯色系搭配工具
+> `css3d` `css动态变量`
 
-  @media (min-width: 620px) {
-    .link-list {
-      row-gap: 20px;
-      column-gap: 20px;
-      grid-template-columns: 1fr 1fr;
+作为一名小屏党，新年计划入手iphone12mini，于是针对相关信息作了些搜索，最后决定等明年的13/12s。
+而在浏览电商平台时，针对手机的颜色搭配也思忖了许久，于是乎撸了个颜色搭配器（非自动）来方便配色。
+
+**配色范围**
+- 主色
+- 侧边色
+- 镜头块色
+- 街头边框色
+- logo色
+
+## 预览
+
+<Story name="A01">
+  {Template.bind({})}
+</Story>
+
+## 技术点
+
+### 3d旋转
+### css动态变量
+### 圆角欺骗
+
+## 源码
+
+**Vue Code**
+
+    <template>
+        <div class="iphone-perspective" :style="extraRoot">
+            <div class="iphone-device">
+                <div class="iphone-front-s"></div>
+                <div class="iphone-front">
+                    <div class="notch">
+                        <div class="camera"></div>
+                        <div class="speaker"></div>
+                    </div>
+                </div>
+                <div class="iphone-back">
+                    <div class="iphone-cam-group">
+                        <div class="iphone-ba-cam1"></div>
+                        <div class="iphone-ba-cam2"></div>
+                        <div class="iphone-ba-light"></div>
+                        <div class="iphone-ba-spot"></div>
+                    </div>
+                    <div class="iphone-brand">
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" p-id="1184"
+                             xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200" fill="currentColor">
+                            <path d="M584 232.992q32-11.008 64-42.016 36-36.992 52.992-80t16.992-79.008V18.976q-2.016-6.016-2.016-8 0-0.992-0.512-2.016t-0.512-2.016l-2.016-7.008-7.008 2.016q-100.992 23.008-144 86.016-44 62.016-44.992 148v8l7.008-0.992q39.008-4 60-10.016z m340 512q-50.016-15.008-88.992-71.008-39.008-56.992-39.008-128 0-64.992 36.992-118.016 20-28.992 66.016-68l4.992-4.992-4-4.992q-32-40-63.008-60.992-56.992-40-130.016-39.008-44 0-104.992 20-56.992 20-82.016 20-20 0-79.008-18.016-63.008-18.016-107.008-18.016-52 0-96 22.016-43.008 22.016-76.992 66.016-68 88-68 224.992 0 74.016 22.016 148.992 22.016 74.016 66.016 152 88.992 156 183.008 156 31.008 0 80.992-20 47.008-19.008 80.992-19.008 36.992 0 87.008 18.016 56 20 84.992 20 80 0 158.016-119.008 50.016-76 72.992-150.016l2.016-7.008z"
+                                  p-id="1185"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="iphone-back-s"></div>
+                <div class="iphone-left iphone-side"></div>
+                <div class="iphone-right iphone-side"></div>
+                <div class="iphone-top iphone-side"></div>
+                <div class="iphone-bottom iphone-side"></div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        export default {
+            name: "PhoneColor",
+
+            props: {
+                main: {
+                    type: String,
+                    default: '#bf2a2a'
+                },
+                side: {
+                    type: String,
+                    default: '#ede9e8'
+                },
+                cam: {
+                    type: String,
+                    default: '#ede9e8'
+                },
+                camRing: {
+                    type: String,
+                    default: '#bf2a2a'
+                },
+                logo: {
+                    type: String,
+                    default: '#ede9e8'
+                },
+                animateSpeed: {
+                    type:Number,
+                    default: 12
+                }
+            },
+            computed:{
+               extraRoot(){
+                   const {
+                       main,
+                       side,
+                       cam,
+                       camRing,
+                       logo,
+                       animateSpeed = 12
+                   } = this
+
+                   return {
+                       '--main': main,
+                       '--side': side,
+                       '--cam': cam,
+                       '--camRing': camRing,
+                       '--logo': logo,
+                       '--dur': `${animateSpeed}s`
+                   }
+               }
+            }
+        }
+    </script>
+
+    <style scoped>
+        @import "index.css";
+    </style>
+
+**Style Code**
+
+    /*index.css*/
+
+    *,
+    *:after,
+    *:before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
     }
-  }
 
-  @media all and (-ms-high-contrast:none) {
-  .link-list {
-      display: -ms-grid;
-      -ms-grid-columns: 1fr 1fr;
-      -ms-grid-rows: 1fr 1fr;
+    .iphone-perspective {
+        position: relative;
+        margin: 0px auto;
+        width: 239.99952px;
+        height: 508px;
+        -webkit-perspective: 1200px;
+        -moz-perspective: 1200px;
+        perspective: 1200px;
+        -webkit-perspective-origin: 50% 0%;
+        -moz-perspective-origin: 50% 0%;
+        perspective-origin: 50% 0%;
+
+        --main: #bf2a2a;
+        --side: #ede9e8;
+        --cam: #bf2a2a;
+        --camRing: #ede9e8;
+        --logo: #ede9e8;
+        --dur: 12s;
     }
-  }
 
-  .link-item {
-    display: block;
-    padding: 20px 30px 20px 15px;
-    border: 1px solid #00000010;
-    border-radius: 5px;
-    transition: background 150ms ease-out, border 150ms ease-out, transform 150ms ease-out;
-    color: #333333;
-    display: flex;
-    align-items: flex-start;
-  }
+    @keyframes show {
+        0%,100%{
+            -webkit-transform: rotateY(17deg) rotateX(17deg);
+            -moz-transform: rotateY(17deg) rotateX(17deg);
+            transform: rotateY(17deg) rotateX(17deg);
+        }
+        25%{
+            -webkit-transform: rotateY(180deg) rotateX(-45deg);
+            -moz-transform: rotateY(180deg) rotateX(-45deg);
+            transform: rotateY(180deg) rotateX(-45deg);
+        }
+        50%{
+            -webkit-transform: rotateY(272deg) rotateX(-45deg);
+            -moz-transform: rotateY(272deg) rotateX(45deg);
+            transform: rotateY(272deg) rotateX(-45deg);
+        }
+        75%{
+            -webkit-transform: rotateY(367deg) rotateX(45deg);
+            -moz-transform: rotateY(367deg) rotateX(45deg);
+            transform: rotateY(367deg) rotateX(45deg);
+        }
+    }
 
-  .link-item:hover {
-    border-color: #1EA7FD50;
-    transform: translate3d(0, -3px, 0);
-    box-shadow: rgba(0, 0, 0, 0.08) 0 3px 10px 0;
-  }
+    .iphone-device {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: -webkit-transform 0.7s ease-in-out;
+        -moz-transition: -moz-transform 0.7s ease-in-out;
+        transition: transform 0.7s ease-in-out;
+        transform: rotateY(180deg) rotateX(1deg);
+        animation: show infinite ease;
+        animation-duration: var(--dur);
+    }
 
-  .link-item:active {
-    border-color: #1EA7FD;
-    transform: translate3d(0, 0, 0);
-  }
+    .iphone-device,
+    .iphone-device > div{
+        position: absolute;
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
 
-  .link-item strong {
-    font-weight: 700;
-    display: block;
-    margin-bottom: 2px;
-  }
+    .iphone-front-s,
+    .iphone-back-s,
+    .iphone-front,
+    .iphone-back {
+        width: 239.99952px;
+        height: 508px;
+        border-radius: 34px;
+        overflow: hidden;
+        background: var(--side);
+    }
 
-  .link-item img {
-    height: 40px;
-    width: 40px;
-    margin-right: 15px;
-    flex: none;
-  }
+    .notch{
+        background: #040404;
+        width: 60%;
+        height: 30px;
+        margin: 0 auto;
+        border-bottom-left-radius: 24px;
+        border-bottom-right-radius: 24px;
+        position: relative;
+    }
+    .notch::before,
+    .notch::after {
+        content: '';
+        height: 8px;
+        position: absolute;
+        top: 0;
+        width: 8px;
+    }
+    .notch::before {
+        background: radial-gradient(circle at bottom right, transparent 0, transparent 70%, black 70%, black 100%);
+        right: -8px;
+    }
+    .notch:after {
+        background: radial-gradient(circle at bottom left, transparent 0, transparent 70%, black 70%, black 100%);
+        left: -8px;
+    }
+    .notch .camera {
+        width: 6px;
+        height: 6px;
+        top: 9px;
+        border-radius: 100%;
+        position: absolute;
+        right: 20px;
+        background: #0d4d71;
+    }
+    .notch .speaker {
+        height: 6px;
+        width: 60px;
+        left: 50%;
+        position: absolute;
+        top: 9px;
+        margin-left: -30px;
+        background: #171818;
+        border-radius: 6px;
+    }
 
-  .link-item span {
-    font-size: 14px;
-    line-height: 20px;
-  }
+    .iphone-cam-group{
+        position: relative;
+        margin: 15px;
+        border-radius: 24px;
+        width: 35%;
+        height: 20%;
+        background: var(--cam);
+        box-shadow: 3px 2px 5px 6px #d0cbcd;
+    }
+    .iphone-ba-cam1,
+    .iphone-ba-cam2{
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        left: 10px;
+        border: 5px solid var(--camRing);
+        border-radius: 50%;
+        background: radial-gradient(#2c2b31,#335fc2 12.5%,#3b3a3f 30%, #11110f 57.6%, #11110f);
+    }
+    .iphone-ba-cam1{
+        top: 10px;
+    }
+    .iphone-ba-cam2{
+        bottom: 10px;
+    }
+    .iphone-ba-light{
+        width: 6px;
+        height: 6px;
+        top: 15px;
+        position: absolute;
+        right: 20px;
+        border: 1px solid #dce5ee;
+        border-radius: 50%;
+        background: #181617;
+    }
+    .iphone-ba-spot{
+        width: 20px;
+        height: 20px;
+        top: 50%;
+        position: absolute;
+        right: 12px;
+        border: 1px solid #8a8a88;
+        border-radius: 50%;
+        background: radial-gradient(#ffffff,#bba99f 12.5%,#bba99f 30%, #f2e9e4 57.6%, #bba99f);
+        transform: translateY(-50%);
+    }
 
-  .tip {
-    display: inline-block;
-    border-radius: 1em;
-    font-size: 11px;
-    line-height: 12px;
-    font-weight: 700;
-    background: #E7FDD8;
-    color: #66BF3C;
-    padding: 4px 12px;
-    margin-right: 10px;
-    vertical-align: top;
-  }
+    .iphone-brand{
+        width: 100%;
+        height: 20%;
+        top: 50%;
+        transform: translateY(-50%);
+        position: absolute;
+    }
+    .iphone-brand svg{
+        color: var(--logo);
+        width: 100%;
+        height: 100%;
+    }
 
-  .tip-wrapper {
-    font-size: 13px;
-    line-height: 20px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-  }
+    .iphone-top,
+    .iphone-bottom {
+        width: 30px;
+        height: 179.99952px;
+        -webkit-transform-origin: 50% 0;
+        -moz-transform-origin: 50% 0;
+        transform-origin: 50% 0;
+        background-size: 100% 100%;
+    }
 
-  .tip-wrapper code {
-    font-size: 12px;
-    display: inline-block;
-  }
+    .iphone-left,
+    .iphone-right {
+        width: 30px;
+        height: 448px;
+    }
 
 
-`}</style>
+    .iphone-front {
+        border: 10px solid #040404;
+        background: #444343 url(./waller.jpg) no-repeat top right;
+        background-size: cover;
+        -webkit-transform: rotateY(0deg) translateZ(15px);
+        -moz-transform: rotateY(0deg) translateZ(15px);
+        transform: rotateY(0deg) translateZ(15px);
+    }
 
-# Title 001
-> `A01`
+    .iphone-back {
+        border: 1px solid #2e2c2d;
+        background: var(--main);
+        -webkit-transform: rotateX(180deg) rotateZ(180deg) translateZ(15px);
+        -moz-transform: rotateX(180deg) rotateZ(180deg) translateZ(15px);
+        transform: rotateX(180deg) rotateZ(180deg) translateZ(15px);
+    }
 
-Storybook helps you build UI components in isolation from your app's business logic, data, and context.
-That makes it easy to develop hard-to-reach states. Save these UI states as **stories** to revisit during development, testing, or QA.
+    .iphone-front-s {
+        -webkit-transform: rotateY(0deg) translateZ(14px);
+        -moz-transform: rotateY(0deg) translateZ(14px);
+        transform: rotateY(0deg) translateZ(14px);
+    }
 
-Browse example stories now by navigating to them in the sidebar.
-View their code in the `src/stories` directory to learn how they work.
-We recommend building UIs with a [**component-driven**](https://componentdriven.org) process starting with atomic components and ending with pages.
+    .iphone-back-s{
+        -webkit-transform: rotateX(180deg) translateZ(14px);
+        -moz-transform: rotateX(180deg) translateZ(14px);
+        transform: rotateX(180deg) translateZ(14px);
+    }
 
-<div className="subheading">A01</div>
+    .iphone-right {
+        background: var(--side) url("./side-right.png") no-repeat;
+        background-size: 100% 100%;
+        -webkit-transform: translateY(30px) rotateY(90deg) translateZ(224.99952px);
+        -moz-transform: translateY(30px) rotateY(90deg) translateZ(224.99952px);
+        transform: translateY(30px) rotateY(90deg) translateZ(224.99952px);
+    }
 
-<div className="tip-wrapper">
-  <span className="tip">Tip</span>Edit the Markdown in{' '}
-  <code>src/stories/Introduction.stories.mdx</code>
-</div>
+    .iphone-left {
+        background: var(--side) url("./side-left.png") no-repeat;
+        background-size: 100% 100%;
+        -webkit-transform: translateY(30px) rotateY(-90deg) translateZ(15px);
+        -moz-transform: translateY(30px) rotateY(-90deg) translateZ(15px);
+        transform: translateY(30px) rotateY(-90deg) translateZ(15px);
+    }
 
-    <div className="subheading">Configure</div>
+    .iphone-top {
+        background: var(--side) url("./side-top.png") no-repeat;
+        background-size: 100% 100%;
+        -webkit-transform: rotateZ(-90deg) translateY(15px) rotateY(90deg);
+        -moz-transform: rotateZ(-90deg) translateY(15px) rotateY(90deg);
+        transform: rotateZ(-90deg) translateY(15px) rotateY(90deg);
+    }
 
-    <div className="tip-wrapper">
-      <span className="tip">Tip</span>Edit the Markdown in{' '}
-      <code>src/stories/Introduction.stories.mdx</code>
-    </div>
+    .iphone-bottom {
+        background: var(--side) url("./side-bottom.png") no-repeat;
+        background-size: 100% 100%;
+        -webkit-transform: rotateZ(-90deg) translateY(15px) rotateY(-90deg) translateZ(508px);
+        -moz-transform: rotateZ(-90deg) translateY(15px) rotateY(-90deg) translateZ(508px);
+        transform: rotateZ(-90deg) translateY(15px) rotateY(-90deg) translateZ(508px);
+    }
+
+    .iphone-side:before,
+    .iphone-side:after {
+        position: absolute;
+        top: -25px;
+        left: 0;
+        width: 30px;
+        height: 23px;
+        background: var(--side);
+        background: -webkit-linear-gradient(bottom, var(--side) 0%, var(--side) 100%);
+        background: -moz-linear-gradient(bottom, var(--side) 0%, var(--side) 100%);
+        background: linear-gradient(to top, var(--side) 0%, var(--side) 100%);
+        content: "";
+        -webkit-transform: rotateX(22.5deg) translateZ(-7px);
+        -moz-transform: rotateX(22.5deg) translateZ(-7px);
+        transform: rotateX(22.5deg) translateZ(-7px);
+    }
+
+    .iphone-side:after {
+        top: 100%;
+        background: -webkit-linear-gradient(top, var(--side) 0%, var(--side) 100%);
+        background: -moz-linear-gradient(top, var(--side) 0%, var(--side) 100%);
+        background: linear-gradient(to bottom, var(--side) 0%, var(--side) 100%);
+        -webkit-transform: rotateX(-22.5deg) translateZ(-7px);
+        -moz-transform: rotateX(-22.5deg) translateZ(-7px);
+        transform: rotateX(-22.5deg) translateZ(-7px);
+    }
+
+## 参考链接
+
+技术链接
+- [html5 css3 3D动画制作手机界面3D叠加突出动画效果](https://www.17sucai.com/pins/demo-show?id=4518)
+- [13 Pure CSS Mobile Devices.css](http://marvelapp.github.io/devices.css/)
+- [apple-iphone-12-mini-3d](https://www.turbosquid.com/zh_cn/3d-models/apple-iphone-12-mini-3d-1642901)
+
+配件链接
+- [充电宝]()
+- [侧边贴]()
+- [背贴膜]()
+- [镜头贴]()

@@ -4,7 +4,7 @@ export default {
   title: 'Others/IconRepo',
   component: IconRepo,
   argTypes: {
-    size: { control: { type: 'select', options: ['MDI-V5'] } }
+    type: { control: { type: 'select', options: ['MDI-V5'] } }
   },
 };
 

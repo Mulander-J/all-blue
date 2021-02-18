@@ -1,13 +1,16 @@
 <template>
     <div class="iphone-perspective" :style="extraRoot">
         <div class="iphone-device">
+            <!-- 前-背板 -->
             <div class="iphone-front-s"></div>
+            <!-- 前 -->
             <div class="iphone-front">
                 <div class="notch">
                     <div class="camera"></div>
                     <div class="speaker"></div>
                 </div>
             </div>
+            <!-- 后 -->
             <div class="iphone-back">
                 <div class="iphone-cam-group">
                     <div class="iphone-ba-cam1"></div>
@@ -23,10 +26,15 @@
                     </svg>
                 </div>
             </div>
+            <!-- 后-背板 -->
             <div class="iphone-back-s"></div>
+            <!-- 侧边-左 -->
             <div class="iphone-left iphone-side"></div>
+            <!-- 侧边-右 -->
             <div class="iphone-right iphone-side"></div>
+            <!-- 侧边-上 -->
             <div class="iphone-top iphone-side"></div>
+            <!-- 侧边-下 -->
             <div class="iphone-bottom iphone-side"></div>
         </div>
     </div>

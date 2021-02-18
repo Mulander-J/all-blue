@@ -56,7 +56,6 @@
     -webkit-transition: -webkit-transform 0.7s ease-in-out;
     -moz-transition: -moz-transform 0.7s ease-in-out;
     transition: transform 0.7s ease-in-out;
-    transform: rotateY(180deg) rotateX(1deg);
     animation: show infinite ease;
     animation-duration: var(--dur);
 }
@@ -214,9 +213,9 @@
 .iphone-back {
     border: 1px solid #2e2c2d;
     background: var(--main);
-    -webkit-transform: rotateX(180deg) rotateZ(180deg) translateZ(15px);
-    -moz-transform: rotateX(180deg) rotateZ(180deg) translateZ(15px);
-    transform: rotateX(180deg) rotateZ(180deg) translateZ(15px);
+    -webkit-transform: rotateY(180deg) translateZ(15px);
+    -moz-transform: rotateY(180deg) translateZ(15px);
+    transform: rotateY(180deg) translateZ(15px);
 }
 
 .iphone-front-s {
@@ -226,9 +225,9 @@
 }
 
 .iphone-back-s{
-    -webkit-transform: rotateX(180deg) translateZ(14px);
-    -moz-transform: rotateX(180deg) translateZ(14px);
-    transform: rotateX(180deg) translateZ(14px);
+    -webkit-transform: rotateY(180deg) translateZ(14px);
+    -moz-transform: rotateY(180deg) translateZ(14px);
+    transform: rotateY(180deg) translateZ(14px);
 }
 
 .iphone-right {

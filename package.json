@@ -1,11 +1,11 @@
 {
-  "name": "vue-3-cli-example",
-  "version": "6.2.0-alpha.23",
+  "name": "all-blue",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "build-storybook -o ./deploy/dist/",
     "serve": "start-storybook -p 6006",
-    "ghPages": "git subtree push --prefix deploy/dist origin gh-pages"
+    "build": "build-storybook -o ./dist/",
+    "ghPages": "deploy.sh"
   },
   "dependencies": {
     "core-js": "^3.6.5",

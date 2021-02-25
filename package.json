@@ -2,10 +2,16 @@
   "name": "all-blue",
   "version": "0.0.1",
   "private": true,
-  "homepage": "https://mulander-j.github.io/all-blue/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mulander-J/all-blue.git"
+  },
+  "author": "Mulander<mulander@qq.com>",
+  "license": "MIT",
+  "homepage": "https://mulander-j.github.io/all-blue",
   "scripts": {
     "serve": "start-storybook -p 6006",
-    "predeploy": "build-storybook -o ./dist/",
+    "predeploy": "build-storybook -o build",
     "deploy": "gh-pages -d build"
   },
   "dependencies": {

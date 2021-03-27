@@ -1,7 +1,7 @@
 import IconRepo from '../components/IconRepo.vue';
 
 export default {
-  title: 'Pieces/IconRepo',
+  title: 'Vue/IconRepo',
   component: IconRepo,
   argTypes: {
     type: { control: { type: 'select', options: ['MDI-V5'] } }

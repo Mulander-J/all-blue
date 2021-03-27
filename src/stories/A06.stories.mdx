@@ -1,0 +1,99 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import sideScroll from '../components/sideScroll.vue';
+
+<Meta title="Vue/ProcessScroll"  component={sideScroll}/>
+
+# 侧边栏进度滚动条
+
+<Story name="ProcessScroll">
+ {
+     {
+        components: { sideScroll },
+        template: '<side-scroll />'
+     }
+ }
+</Story>
+
+---
+---
+
+## template
+```html
+<div id="progressBar" :style="{height: height+'%'}"></div>
+<section class="content"  @scroll="onScroll"></section>
+```
+## js
+```js
+export default{
+    methods:{
+        onScroll(event){
+            let {scrollTop,scrollHeight,clientHeight} = event.target
+            this.height = 100 * scrollTop / (scrollHeight-clientHeight)
+        }
+    }
+}
+```
+## css
+```css
+.wrapper{
+    position: relative;
+}
+/*隐藏原生滚动条*/
+.content::-webkit-scrollbar{
+    width: 0;
+}
+.content{
+    background: #2e2c2d;
+    color: #ffffff;
+    padding: 50px;
+    overflow: scroll;
+    height: 60vh;
+}
+#scrollPath{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 100%;
+    background: rgba(255,255,255,0.5);
+}
+#progressBar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 100%;
+    background: linear-gradient(to top,#008aff,#00ffe7);
+    animation:  animate 5s linear infinite;
+}
+/* 模糊泛光 */
+#progressBar:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top,#008aff,#00ffe7);
+    filter: blur(10px);
+}
+#progressBar:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top,#008aff,#00ffe7);
+    filter: blur(30px);
+}
+/*色彩滤镜*/
+@keyframes animate {
+    0%,100%{
+        filter: hue-rotate(0deg);
+    }
+    50%{
+        filter: hue-rotate(360deg);
+    }
+}
+```

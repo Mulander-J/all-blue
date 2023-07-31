@@ -1,0 +1,115 @@
+import { Meta } from '@storybook/blocks';
+import './index.css'
+
+<Meta title="SVG/SplitFont" />
+
+# SplitFont
+> Reference: [【每天学一点CSS】快看，CSS 让这个文字动起来了~](https://www.bilibili.com/video/BV16p4y117k1)
+
+export const FontSvg =  ()=><svg viewBox="0 0 1000 300">
+    <symbol id="line-text">
+    <text textAnchor="middle" x="50%" y="50%" dy=".4em">
+        Microgoople
+    </text>
+    </symbol>
+    <use xlinkHref="#line-text" className="text"></use>
+    <use xlinkHref="#line-text" className="text"></use>
+    <use xlinkHref="#line-text" className="text"></use>
+    <use xlinkHref="#line-text" className="text"></use>
+</svg>
+
+<div className="Wrap_SplitFont">
+    <FontSvg />
+</div>
+
+## HTML
+
+```html
+<div class="container">
+    <svg viewBox="0 0 1000 300">
+      <symbol id="line-text">
+        <text text-anchor="middle" x="50%" y="50%" dy=".4em">
+            Microgoople
+        </text>
+      </symbol>
+      <use xlink:href="#line-text" class="text"></use>
+      <use xlink:href="#line-text" class="text"></use>
+      <use xlink:href="#line-text" class="text"></use>
+      <use xlink:href="#line-text" class="text"></use>
+    </svg>
+</div>
+```
+
+## CSS
+
+```css
+.container{
+    font-size: 120px;
+    font-weight: bold;
+    height:10rem;
+    text-transform: uppercase;
+    background-color: rgb(41, 45, 62);
+    position: relative;
+}
+svg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.text{
+    fill: none;
+    stroke-width: 5;
+    stroke-dasharray: 0 240;
+    stroke-dashoffset: 0;
+}
+.text:nth-child(4n + 1){
+    stroke: rgb(39,153,238);
+    animation: text1 4s ease-in-out forwards infinite;
+}
+.text:nth-child(4n + 2){
+    stroke: rgb(47,169,92);
+    animation: text2 4s ease-in-out forwards infinite;
+}
+.text:nth-child(4n + 3){
+    stroke: rgb(249,189,56);
+    animation: text3 4s ease-in-out forwards infinite;
+}
+.text:nth-child(4n + 4){
+    stroke: rgb(235,61,50);
+    animation: text4 4s ease-in-out forwards infinite;
+}
+@keyframes text1{
+    100%{
+        stroke-dasharray: 60 180;
+        stroke-dashoffset: 1000;
+    }
+}
+@keyframes text2{
+    100%{
+        stroke-dasharray: 60 180;
+        stroke-dashoffset: 1060;
+    }
+}
+@keyframes text3{
+    100%{
+        stroke-dasharray: 60 180;
+        stroke-dashoffset: 1120;
+    }
+}
+@keyframes text4{
+    100%{
+        stroke-dasharray: 60 180;
+        stroke-dashoffset: 1180;
+    }
+}
+```
+
+## Issue
+
+```bash
+## https://github.com/facebook/react/issues/4908
+## In the interest of saving time, the solution is to use camel case:
+-- <svg xlinkHref="http://i.imgur.com/w7GCRPb.png" />
+## renders to
+++ <svg xlink:href="http://i.imgur.com/w7GCRPb.png" />
+```

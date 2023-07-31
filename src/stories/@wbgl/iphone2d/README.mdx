@@ -26,7 +26,7 @@ import * as Iphone2d from "./index.stories";
 
 如果把手机模型视为一个矩形，那么拼装一部手机至少需要6个平面（上下左右前后）。
 
-![透视图](https://gitee.com/mulander/MdPic/raw/master/img/20210218000001.png)
+![透视图](./docs/20210218000001.png)
 
 ```html
 <div class="iphone-device">
@@ -55,18 +55,18 @@ Transform：
 - 左右两面分别以Y轴旋转-90度与90度，并增加z轴距离为1/2h 和 w-1/2h。
 - 上面先以Y轴90度，再以Z轴旋转-90度；下面先以Y轴-90度，再以Z轴旋转-90度，并增加z轴距离为l
 
-![前后](https://gitee.com/mulander/MdPic/raw/master/img/20210218000002.jpg)
+![前后](./docs/20210218000002.jpg)
 
-![左右](https://gitee.com/mulander/MdPic/raw/master/img/20210218000003.jpg)
+![左右](./docs/20210218000003.jpg)
 
-![上下](https://gitee.com/mulander/MdPic/raw/master/img/20210218000004.jpg)
+![上下](./docs/20210218000004.jpg)
 
 ### 圆角欺骗
 
 上一步构建的模型是个纯粹的矩形，那么如何实现3d圆角呢？因为我们依旧是在编辑平面元素，对于曲面的绘制无法像3d建模一样利用算法实现无数个线平面拼凑成一个曲面。
 但是，我们可以用两个切面的角度来形成视觉欺骗，以达到曲面的效果。
 
-![圆角](https://gitee.com/mulander/MdPic/raw/master/img/20210218000005.jpg)
+![圆角](./docs/20210218000005.jpg)
 
 
 ### css变量

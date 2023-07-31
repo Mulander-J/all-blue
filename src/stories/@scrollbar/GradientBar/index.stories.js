@@ -1,9 +1,9 @@
 import GradientBar from './GradientBar.svelte';
 
 export default {
-  title: 'ScrollBar/GradientBar',
+  // title: 'ScrollBar/GradientBar',
   component: GradientBar,
-  tags: ['autodocs'],
+  // tags: ['autodocs'],
   argTypes: {
     isReverse: {
       control: { 

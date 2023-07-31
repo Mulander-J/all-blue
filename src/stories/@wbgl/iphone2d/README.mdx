@@ -1,0 +1,112 @@
+import { Meta, Story, Controls } from '@storybook/blocks';
+import * as Iphone2d from "./index.stories";
+
+<Meta />
+
+# iPhone12纯色系搭配工具
+> `css3d` `css变量`
+
+小屏党新年计划入手iphone12mini，顺手撸了个颜色搭配器（非自动）来方便配色。
+
+**配色范围**
+- 主色
+- 侧边色
+- 镜头块色
+- 镜头边框色
+- logo色
+
+## 预览
+<Story of={Iphone2d.Preview} />
+<Controls of={Iphone2d.Preview} />
+
+## 技术点
+
+### 三维建模
+所谓 `css3d` , 其本质是在利用2维元素去拼装3维形态。操作的对象仍然是2维的平面的盒子模型，即只有长（width）宽（height），没有高。
+
+如果把手机模型视为一个矩形，那么拼装一部手机至少需要6个平面（上下左右前后）。
+
+![透视图](https://gitee.com/mulander/MdPic/raw/master/img/20210218000001.png)
+
+```html
+<div class="iphone-device">
+    <!-- 前 -->
+    <div class="iphone-front"></div>
+    <!-- 后 -->
+    <div class="iphone-back"></div>
+    <!-- 侧边-左 -->
+    <div class="iphone-left iphone-side"></div>
+        <!-- 侧边-右 -->
+    <div class="iphone-right iphone-side"></div>
+        <!-- 侧边-上 -->
+    <div class="iphone-top iphone-side"></div>
+        <!-- 侧边-下 -->
+    <div class="iphone-bottom iphone-side"></div>
+</div>
+```
+
+设模型长宽高分别为：
+- l:508px;
+- w:239.99952px;
+- h:30px;
+
+Transform：
+- 前后两面分别以Y轴旋转0度与180度，并增加z轴距离为1/2h。
+- 左右两面分别以Y轴旋转-90度与90度，并增加z轴距离为1/2h 和 w-1/2h。
+- 上面先以Y轴90度，再以Z轴旋转-90度；下面先以Y轴-90度，再以Z轴旋转-90度，并增加z轴距离为l
+
+![前后](https://gitee.com/mulander/MdPic/raw/master/img/20210218000002.jpg)
+
+![左右](https://gitee.com/mulander/MdPic/raw/master/img/20210218000003.jpg)
+
+![上下](https://gitee.com/mulander/MdPic/raw/master/img/20210218000004.jpg)
+
+### 圆角欺骗
+
+上一步构建的模型是个纯粹的矩形，那么如何实现3d圆角呢？因为我们依旧是在编辑平面元素，对于曲面的绘制无法像3d建模一样利用算法实现无数个线平面拼凑成一个曲面。
+但是，我们可以用两个切面的角度来形成视觉欺骗，以达到曲面的效果。
+
+![圆角](https://gitee.com/mulander/MdPic/raw/master/img/20210218000005.jpg)
+
+
+### css变量
+模型完成之后，紧接着就是配色了，配色技术依然是老生常谈的 `css变量`。在根元素上申明所有的颜色变量，对应子元素以 `var(--x)` 的形式引用。
+
+在Vue中，则利用 `props` 和 `computed` 属性来完成对象封装。
+
+```css
+ .iphone-perspective {
+    ...
+    --main: #bf2a2a;
+    --side: #ede9e8;
+    --cam: #bf2a2a;
+    --camRing: #ede9e8;
+    --logo: #ede9e8;
+    --dur: 12s;
+}
+.iphone-front-s,
+.iphone-back-s,
+.iphone-front,
+.iphone-back {
+    ...
+    background: var(--side);
+}
+.iphone-brand svg{
+    ...
+    color: var(--logo);
+}
+```
+
+## Issue
+
+- 侧边的按钮实际应该与主色配色一致，代码中是懒得画了直接切的图。
+- 为了补偿圆角的冗余部分配色，前后各自增加了一个背面用来填色，从而导致了模型在旋转时会出现穿模的现象。
+
+## 参考链接
+
+技术链接
+- [13 Pure CSS Mobile Devices.css](http://marvelapp.github.io/devices.css/)
+- [html5 css3 3D动画制作手机界面3D叠加突出动画效果](https://www.17sucai.com/pins/demo-show?id=4518)
+- [Tridiv is a web-based editor for creating 3D shapes in CSS.](http://tridiv.com/)
+- [apple-iphone-12-mini-3d](https://www.turbosquid.com/zh_cn/3d-models/apple-iphone-12-mini-3d-1642901)
+- [CSS 变量教程](http://www.ruanyifeng.com/blog/2017/05/css-variables.html)

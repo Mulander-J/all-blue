@@ -58,7 +58,7 @@
   };
 </script>
 
-<div id="box" on:click={handleToggle}>
+<div id="box" on:click={handleToggle} role="presentation">
   <div class="p-10 border-2 bg-white text-black dark:text-white dark:bg-black">
     <p>{RandomText}</p>
   </div>

@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "predeploy": "storybook build -o build && touch ./build/.nojekyll",
-    "deploy": "gh-pages -d build"
+    "predeploy": "storybook build -o build",
+    "deploy": "touch ./build/.nojekyll && gh-pages -d build --dotfiles true"
   },
   "keywords": [],
   "author": "",

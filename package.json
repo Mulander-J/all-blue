@@ -4,8 +4,7 @@
   "description": "",
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "predeploy": "build-storybook -o build",
+    "predeploy": "storybook build -o build",
     "deploy": "gh-pages -d build"
   },
   "keywords": [],

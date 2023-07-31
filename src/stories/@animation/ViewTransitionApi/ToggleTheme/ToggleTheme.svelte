@@ -1,5 +1,5 @@
 <script>
-  import { RandomText } from "../../../constant";
+  import { RandomText } from "../../../../constant";
   import "./index.scss";
 
   let isDark
@@ -59,7 +59,7 @@
 </script>
 
 <div id="box" on:click={handleToggle}>
-  <div class="p-10 bg-white text-black dark:text-white dark:bg-black">
+  <div class="p-10 border-2 bg-white text-black dark:text-white dark:bg-black">
     <p>{RandomText}</p>
   </div>
 </div>

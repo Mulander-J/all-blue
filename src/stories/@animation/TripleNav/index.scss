@@ -1,0 +1,82 @@
+nav{
+  position: relative;
+  display: flex;
+  gap: 30px;
+  padding: 15px 60px;
+  --bg: #222327;
+  --active: #29fd53;
+  --dur: .5s;
+  background-color: var(--bg);
+}
+nav li{
+  position: relative;
+  color: #999;
+  text-decoration: none;
+  font-size: 1.5em;
+  z-index: 2;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 30px;
+  transition: var(--dur);
+  &.active {
+    color: var(--bg);
+  }
+}
+
+.indicator,
+.indicators{
+  position: absolute;
+  height: 75px;
+  width: 150px;
+  background-color: var(--active);
+  z-index: 1;
+  transition: var(--dur);
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 15px;
+    border-radius: 15px;
+    transition: var(--dur);
+    background-color: var(--active);
+  }
+  &::before {
+    left: -30px;
+    box-shadow: 15px 30px var(--active),
+    5px 60px var(--active),
+    -15px 15px var(--bg),
+    -10px 45px var(--bg);
+  }
+  &::after {
+    right: -30px;
+    box-shadow: 5px 30px var(--active),
+    -15px 60px var(--active),
+    15px 15px var(--bg),
+    10px 45px var(--bg);
+  }
+}
+
+.indicators {
+  z-index: -1;
+}
+
+.indicators.isChanged,
+.indicator.isChanged {
+  &::before{
+    left: -10px;
+    box-shadow: -15px 30px var(--active),
+    -5px 60px var(--active),
+    -15px 15px var(--bg),
+    -20px 45px var(--bg);
+  }
+  &::after{
+    right: -20px;
+    box-shadow: 10px 30px var(--active),
+    20px 60px var(--active),
+    15px 15px var(--bg),
+    25px 45px var(--bg);
+  }
+}

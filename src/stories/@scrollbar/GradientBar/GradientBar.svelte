@@ -1,6 +1,7 @@
 <script>
   import { RandomText } from '../../../constant'
   import "./index.scss";
+
   /**
    * @type {boolean} Is Horizontal
    */
@@ -9,12 +10,10 @@
    * @type {boolean} Direction Reverse
    */
   export let isReverse = false;
-
   /**
    * @type {number} Repeat count
    */
   export let repeat = 10;
-
   /**
    * @type {string} Text Content
    */

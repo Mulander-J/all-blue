@@ -1,17 +1,15 @@
 <script>
-  import "./index.scss";
   import { onMount } from "svelte";
-
-  /**
-   * @type {string} Animation Type
-   */
-  export let animation = "static";
-  // static|shadow|slide
+  import "./index.scss";
 
   /**
    * @type {number} Menu Count
    */
   export let count = 3;
+  /**
+   * @type {string} Animation Type
+   */
+  export let animation = "static";
 
   let navName = 0;
   let isChanged = false;
@@ -47,7 +45,7 @@
     // init default offset
     showIndicator &&
       markerElement &&
-      animateNav(markerElement?.parentElement?.children?.[navName]);
+      animateNav(markerElement.parentElement.children[navName]);
   });
 </script>
 

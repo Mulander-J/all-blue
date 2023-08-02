@@ -1,4 +1,5 @@
 import TripleNav from './TripleNav.svelte';
+// import GradientBar from '../../@scrollbar/GradientBar/GradientBar.svelte';
 
 /**
  * [Refrence:Magic Navigation Menu Indicator using CSS & Javascript](https://www.youtube.com/watch?v=k26kBQP2XH0)
@@ -9,13 +10,15 @@ export default {
   component: TripleNav,
   argTypes: {
     animation: {
+      description: 'Animation Type',
       control: { 
         type: 'select',
       },
       options: ['static', 'slide', 'shadow']
     },
     count: { 
-      control: { 
+      description: 'Menu Count',
+      control: {
         type: 'number',
         min: 1,
         max: 6,

@@ -1,15 +1,19 @@
 {
-  "name": "allstory",
+  "name": "all_blue",
   "version": "1.0.0",
-  "description": "",
+  "description": "code art",
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "predeploy": "storybook build -o build",
     "deploy": "touch ./build/.nojekyll && gh-pages -d build --dotfiles true"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["blog", "css", "svelte"],
+  "author": "Mulander",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mulander-J/all-blue" 
+  },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.1.1",
     "@storybook/addon-interactions": "^7.1.1",

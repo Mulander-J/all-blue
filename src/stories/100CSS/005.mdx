@@ -1,0 +1,263 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#5` [Statistic](https://100dayscss.com/days/5/)
+
+Statistic: In a world of numbers, it is important to be able to interpret them correctly. Beautiful statistics help to capture these data.
+
+## CodePen
+
+> See the Pen [#5 CSS Challenge / Statistic](https://codepen.io/mulander/pen/wvQZxqe)
+> by Mulander ([@mulander](https://codepen.io/mulander))
+> on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#5 CSS Challenge / Statistic"
+  src="https://codepen.io/mulander/embed/wvQZxqe?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Learn
+
+Render chart by svg
+
+### yAxis
+
+A few horizontal straight lines with a spacing of 45
+
+```html
+<path d="M 0,0 L 266,0"></path>
+<path d="M 0,45 L 266,45"></path>
+<path d="M 0,90 L 266,90"></path>
+```
+
+### xAxis
+
+On the x-axis, reserve 10 on the left and right, and take one point at intervals of 35
+
+```html
+<text x="28" y="110">Mon</text>
+<text x="63" y="110">Tue</text>
+<text x="98" y="110">Wen</text>
+<!-- ... -->
+```
+
+### dot
+
+Combine the x and y coordinates of the additional points
+
+```html
+<circle cx="28" cy="61" r="3px"></circle>
+<circle cx="63" cy="20" r="3px"></circle>
+<!-- ... -->
+```
+
+### line
+
+Combine the x and y coordinates of the additional points to form a polyline
+
+```html
+<polyline
+  width="288"
+  points="28,61 63,20 98,65 133,55 168,61 203,74 238,64"
+></polyline>
+```
+
+## Code
+
+```html
+<div class="frame">
+  <div class="center">
+    <div class="card">
+      <div class="board">
+        <div class="left">
+          <h3>WEEKLY REPORT</h3>
+          <h5>01. Feb - 07. Feb</h5>
+        </div>
+        <div class="right">
+          <h4>Revenue</h4>
+          <span>$ 3621.79</span>
+        </div>
+      </div>
+
+      <div class="chart">
+        <ul class="series">
+          <li>Views</li>
+          <li>Purchases</li>
+        </ul>
+        <div class="graph">
+          <svg>
+            <g id="y-axis" color="#dedede">
+              <path d="M 0,0 L 266,0"></path>
+              <path d="M 0,45 L 266,45"></path>
+              <path d="M 0,90 L 266,90"></path>
+            </g>
+
+            <g id="x-axis">
+              <text x="28" y="110">Mon</text>
+              <text x="63" y="110">Tue</text>
+              <text x="98" y="110">Wen</text>
+              <text x="133" y="110">Thu</text>
+              <text x="168" y="110">Fri</text>
+              <text x="203" y="110">Sat</text>
+              <text x="238" y="110">Sun</text>
+            </g>
+            <g class="line" color="#fa7373">
+              <polyline
+                width="288"
+                points="28,61 63,20 98,65 133,55 168,61 203,74 238,64"
+              ></polyline>
+              <circle cx="28" cy="61" r="3px"></circle>
+              <circle cx="63" cy="20" r="3px"></circle>
+              <circle cx="98" cy="65" r="3px"></circle>
+              <circle cx="133" cy="55" r="3px"></circle>
+              <circle cx="168" cy="61" r="3px"></circle>
+              <circle cx="203" cy="74" r="3px"></circle>
+              <circle cx="238" cy="64" r="3px"></circle>
+            </g>
+            <g class="line" color="#7ba2ff">
+              <polyline
+                points="28,81 63,40 98,15 133,35 168,81 203,34 238,24"
+              ></polyline>
+              <circle cx="28" cy="81" r="3px"></circle>
+              <circle cx="63" cy="40" r="3px"></circle>
+              <circle cx="98" cy="15" r="3px"></circle>
+              <circle cx="133" cy="35" r="3px"></circle>
+              <circle cx="168" cy="81" r="3px"></circle>
+              <circle cx="203" cy="34" r="3px"></circle>
+              <circle cx="238" cy="24" r="3px"></circle>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+```css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul,
+li {
+  list-style: none;
+}
+.frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  margin-top: -200px;
+  margin-left: -200px;
+  border-radius: 2px;
+  box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+  background: #42a7a1;
+  color: black;
+  --tag1: #fa7373;
+  --tag2: #7ba2ff;
+}
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.card {
+  min-height: 220px;
+  width: 280px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
+}
+.board {
+  background: #f1ba64;
+  color: #fff;
+  height: 60px;
+  width: 100%;
+  padding: 12px 15px;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.board .left h3,
+.board .right span {
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.board .left h5,
+.board .right h4 {
+  font-weight: 400;
+  font-size: 11px;
+}
+
+.chart .series {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 10px 10px 14px 10px;
+  gap: 10px;
+}
+.chart .series li {
+  position: relative;
+  font-size: 9px;
+  color: #606060;
+  line-height: 13px;
+  padding-left: 25px;
+}
+.chart .series li::before {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  display: block;
+  content: "";
+  width: 11px;
+  height: 3px;
+  border-radius: 3px;
+}
+.chart .series li:nth-child(1)::before {
+  background-color: var(--tag1);
+}
+.chart .series li:nth-child(2)::before {
+  background-color: var(--tag2);
+}
+
+.graph {
+  position: relative;
+}
+.graph svg #y-axis path {
+  stroke-width: 1px;
+  stroke: currentColor;
+  stroke-linecap: round;
+}
+.graph svg #x-axis text {
+  font-size: 9px;
+  color: #949494;
+  line-height: 30px;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+.graph svg .line polyline {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 2px;
+}
+.graph svg .line circle {
+  fill: currentColor;
+}
+```

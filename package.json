@@ -2,17 +2,24 @@
   "name": "all_blue",
   "version": "1.0.0",
   "description": "code art",
+  "type": "module",
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "predeploy": "storybook build -o build",
-    "deploy": "touch ./build/.nojekyll && gh-pages -d build --dotfiles true"
+    "build": "storybook build -o build",
+    "deploy": "touch ./build/.nojekyll && gh-pages -d build --dotfiles true",
+    "ghpage": "pnpm run build && pnpm run deploy",
+    "plop": "plop"
   },
-  "keywords": ["blog", "css", "svelte"],
+  "keywords": [
+    "blog",
+    "css",
+    "svelte"
+  ],
   "author": "Mulander",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mulander-J/all-blue" 
+    "url": "https://github.com/Mulander-J/all-blue"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.1.1",
@@ -25,6 +32,7 @@
     "@storybook/testing-library": "^0.2.0",
     "autoprefixer": "^10.4.14",
     "gh-pages": "^3.1.0",
+    "plop": "^3.1.2",
     "postcss": "^8.4.27",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

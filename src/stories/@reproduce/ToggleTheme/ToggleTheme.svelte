@@ -1,5 +1,5 @@
 <script>
-  import { RandomText } from "../../../../constant";
+  import { RandomText } from "../../../constant";
   import "./index.scss";
 
   let isDark

@@ -1,4 +1,6 @@
-export default function (plop) {
+/** plopfile.js */
+
+module.exports = function (plop) {
     plop.setGenerator('svelteComp', {
         description: 'svelte component',
         prompts: [{

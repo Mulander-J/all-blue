@@ -1,8 +1,7 @@
 {
   "name": "all_blue",
   "version": "1.0.0",
-  "description": "code art",
-  "type": "module",
+  "description": "code art",  
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build": "storybook build -o build",

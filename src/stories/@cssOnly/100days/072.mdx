@@ -1,0 +1,112 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#72` [The Rings](https://100dayscss.com/days/72/)
+
+The Rings: A simple and meditative animation made of circles. What geometric patterns of circles come to your mind?
+
+## CodePen
+
+> See the Pen [#72 CSS Challenge / The Rings](https://codepen.io/mulander/pen/yLQWZvJ)
+> by Mulander ([@mulander](https://codepen.io/mulander))
+> on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#72 CSS Challenge / The Rings"
+  src="https://codepen.io/mulander/embed/yLQWZvJ?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Learn
+
+### Each Pug
+
+[Unbuffered Code](https://pugjs.org/language/code.html#unbuffered-code)
+
+```
+- for (var x = 0; x < 10; x++)
+    div
+```
+
+[Pug-iteration](https://pugjs.org/language/iteration.html)
+
+```
+each val in [1, 2, 3, 4, 5]
+    li= val
+```
+
+### Each SCSS
+
+```css
+@for $i from 1 through 10 {
+  &:nth-child(#{$i}) {
+    animation-delay: ($i * 0.2s);
+  }
+}
+```
+
+## Code
+
+```pug
+//pug
+
+.frame: .center 
+  - for (var x = 0; x < 10; x++)
+    .ring
+```
+
+```css
+.frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  margin-top: -200px;
+  margin-left: -200px;
+  border-radius: 2px;
+  box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  background: #1abc9c;
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+.ring {
+  box-sizing: border-box;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  transform-origin: center;
+  animation: an-ring 5s 0s ease-in-out infinite;
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: ($i * 0.2s);
+    }
+  }
+}
+
+@keyframes an-ring {
+  4% {
+    transform: rotateX(0) rotateY(0) rotateZ(0);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(-360deg) rotateZ(0);
+  }
+}
+```

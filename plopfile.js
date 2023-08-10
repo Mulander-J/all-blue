@@ -37,6 +37,9 @@ module.exports = function (plop) {
             const strs = String(data.short).split(':')
             newData.title = strs[0].trim();
             newData.intro = strs[1].trim();
+
+            console.log(`CodePenTitle: #${newData.day} CSS Challenge / ${newData.title}`)
+
             return [{
                 type: 'add',
                 path: 'src/stories/@cssOnly/100days/{{fileIndex}}.mdx',

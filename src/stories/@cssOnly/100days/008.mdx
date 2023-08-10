@@ -1,0 +1,161 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#8` [Metaballs](https://100dayscss.com/days/8/)
+
+Metaballs: At first glance impossible to implement with CSS, but filters make this possible too.
+
+## CodePen
+
+> See the Pen [#8 CSS Challenge / Metaballs](https://codepen.io/mulander/pen/NWEVEGr)
+> by Mulander ([@mulander](https://codepen.io/mulander))
+> on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#8 CSS Challenge / Metaballs"
+  src="https://codepen.io/mulander/embed/NWEVEGr?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Learn
+
+> [Quote:你所不知道的 CSS 滤镜技巧与细节——chokcoco](https://github.com/chokcoco/iCSS/issues/30)
+
+`Blur` Mixing `Contrast` to produce a fusion effect
+
+![fusion.gif](./imgs/20230810000001.gif)
+
+Look carefully at the process of intersecting two circles, when the edge is in contact with the edge, it will produce a border fusion effect, through the contrast filter to take out the blurred edges of the Gaussian blur, the use of Gaussian blur to achieve the fusion effect.
+
+The realization of the above effect is based on two things:
+
+- `filter: blur()` sets a Gaussian blur effect to the image.
+- `filter: contrast()` adjusts the contrast of the image.
+
+The graphic is animated on a canvas background with filter: contrast() set;
+
+The animated graphic has filter: blur() set (the parent element of the animated graphic needs to be a canvas with filter: contrast() set);
+
+This means that the two circles above are animated on a large white background with filter: contrast() set, and the two circles have filter: blur() set, both of which are required.
+
+## Code
+
+```pug
+// pug
+.frame
+	.center
+		.ball
+		- for (var x = 0; x < 8; x++)
+			div(class='blubb-'+x)
+		- for (var y = 0; y < 10; y++)
+			div(class='sparkle-'+y)
+```
+
+```css
+$theme: #2ab5b5;
+
+.frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  margin-top: -200px;
+  margin-left: -200px;
+  border-radius: 2px;
+  box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+  background: #000;
+  animation: hue 2.5s ease-in-out 0.2s infinite;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ball {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  background: $theme;
+  border-radius: 50%;
+  filter: blur(15px);
+}
+
+@for $i from 1 through 8 {
+  .blubb-#{$i} {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    transform: rotate((random(300)) + deg);
+
+    &:after {
+      position: absolute;
+      display: block;
+      content: "";
+      width: 50px;
+      height: 50px;
+      background: $theme;
+      border-radius: 50%;
+      transform-origin: (40 - $i * 3) + px (40 - $i * 3) + px;
+      animation: rotate (2.5 + $i / 5) + s ease-in-out ($i / 5) + s infinite;
+      filter: blur(5px);
+    }
+  }
+}
+
+@for $i from 1 through 10 {
+  .sparkle-#{$i} {
+    position: absolute;
+    top: 38px;
+    left: 38px;
+    width: (7 + $i) + px;
+    height: (7 + $i) + px;
+    transform: rotate((random(300)) + deg);
+
+    &:after {
+      position: absolute;
+      display: block;
+      content: "";
+      width: (7 + $i) + px;
+      height: (7 + $i) + px;
+      background: $theme;
+      border-radius: 50%;
+      transform-origin: (60 - $i * 2) + px (60 - $i * 2) + px;
+      animation: rotate (3.5 + $i / 5) + s ease-in-out ($i / 5) + s infinite;
+      filter: blur(3px);
+    }
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+  to {
+    transform: rotate(360deg) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hue {
+  0% {
+    filter: contrast(25) hue-rotate(0);
+  }
+  100% {
+    filter: contrast(25) hue-rotate(360deg);
+  }
+}
+```

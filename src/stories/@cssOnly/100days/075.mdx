@@ -1,0 +1,118 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#75` [Spinning Discs](https://100dayscss.com/days/75/)
+
+Spinning Discs: A real 3D sphere is not possible with CSS only as far as I know. But the illusion of a sphere can be achieved in several ways.
+
+## CodePen
+
+> See the Pen [#75 CSS Challenge / Spinning Discs](https://codepen.io/mulander/pen/vYQqywv)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#75 CSS Challenge / Spinning Discs"
+  src="https://codepen.io/mulander/embed/vYQqywv?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Learn
+
+`rotate3d` needs `transform-style: preserve-3d;` and `perspective`
+
+## Code
+
+```html
+// pug
+
+.frame: .center: .circle
+	- for(let i = 0; i < 14; i++)
+		.slice
+```
+
+```css
+// delete the following line if no text is used
+// edit the line if you wanna use other fonts
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700,300);
+
+// use only the available space inside the 400x400 frame
+.frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  margin-top: -200px;
+  margin-left: -200px;
+  border-radius: 2px;
+  box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  background: #d33526;
+  color: #fff;
+  filter: contrast(1.2);
+}
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  perspective: 1500px;
+}
+.circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  animation: rotate 7s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+.slice {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  @for $i from 1 through 7 {
+    &:nth-child(#{$i}) {
+      border: 10px solid rgba(255,255,255,.2);
+      filter: blur(1px);
+      transform: rotateX($i * 30deg);
+    }
+  }
+  @for $i from 8 through 14 {
+    &:nth-child(#{$i}) {
+      background: hsl(60 * $i, 80%, 50%);
+      opacity: 0.3;
+      transform: rotateY($i * 30deg) scale(.6);
+    }
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+  }
+  25% {
+    transform: rotateY(45deg) rotateX(180deg) rotateZ(20deg);
+  }
+  50% {
+    transform: rotateY(225deg) rotateX(0deg) rotateZ(90deg);
+  }
+  75% {
+    transform: rotateY(0deg) rotateX(45deg) rotateZ(120deg);
+  }
+  100% {
+    transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+  }
+}
+```

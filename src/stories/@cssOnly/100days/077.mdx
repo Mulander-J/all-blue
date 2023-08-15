@@ -136,9 +136,9 @@ on [CodePen](https://codepen.io).
 	border-radius: 2px;
 	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.15);
 	overflow: hidden;
-	background: #9b59b6;
+	background: #c900ff;
 	color: #fff;
-	filter: contrast(3);
+	// filter: contrast(3);
 }
 .center {
 	position: absolute;
@@ -164,7 +164,7 @@ on [CodePen](https://codepen.io).
 		border-radius: 50%;
 		background: #fff;
 		transition: all 0.3s ease-in-out;
-		animation: move 6s ease-in-out infinite alternate-reverse;
+		animation: move 6s ease-in-out infinite;
 		&:nth-child(1) {
 			mix-blend-mode: difference;
 			animation-delay: 0s;
@@ -189,7 +189,7 @@ on [CodePen](https://codepen.io).
 	}
 	25% {
 		left: calc(100% - 40px);
-		top: 0%;
+		top: calc(100% - 40px);
 	}
 	50% {
 		top: calc(100% - 40px);
@@ -197,7 +197,7 @@ on [CodePen](https://codepen.io).
 	}
 	75% {
 		left: calc(100% - 40px);
-		top: calc(100% - 40px);
+		top: 0%;
 	}
 }
 ```

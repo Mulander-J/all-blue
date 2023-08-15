@@ -1,0 +1,136 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#80` [Flexbox Accordeon](https://100dayscss.com/days/80/)
+
+Flexbox Accordeon: I implemented the whole thing with Flexbox, but I&#x27;m sure you can think of many other variations to create this effect.
+
+## CodePen
+
+> See the Pen [#80 CSS Challenge / Flexbox Accordeon](https://codepen.io/mulander/pen/ExOqMKv)
+> by Mulander ([@mulander](https://codepen.io/mulander))
+> on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#80 CSS Challenge / Flexbox Accordeon"
+  src="https://codepen.io/mulander/embed/ExOqMKv?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Learn
+
+```css
+.ele:hover {
+  width: 100%
+}
+/* equals */
+.ele:hover {
+  flex-basis: 100%;
+}
+```
+
+[flex-basis](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis)
+
+The flex-basis CSS property describes the initial main size of the flex item before any free space is distributed according to the flex factors described in the flex property (flex-grow and flex-shrink).
+
+> Note: In case both flex-basis (other than auto) and width (or height in case of flex-direction: column) are set for an element, flex-basis has priority.
+
+Syntax
+
+```yaml
+/* Specify <'width'> */
+flex-basis: 10em;
+flex-basis: 3px;
+flex-basis: 50%;
+flex-basis: auto;
+
+/* Intrinsic sizing keywords */
+flex-basis: max-content;
+flex-basis: min-content;
+flex-basis: fit-content;
+
+/* Automatically size based on the flex item's content */
+flex-basis: content;
+
+/* Global values */
+flex-basis: inherit;
+flex-basis: initial;
+flex-basis: revert;
+flex-basis: revert-layer;
+flex-basis: unset;
+```
+
+## Code
+
+```html
+<div class="frame">
+  <div class="wrapper">
+    <div class="box"><span>First</span></div>
+    <div class="box"><span>Second</span></div>
+    <div class="box"><span>Third</span></div>
+    <div class="box"><span>Fourth</span></div>
+  </div>
+</div>
+```
+
+```css
+.frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  margin-top: -200px;
+  margin-left: -200px;
+  border-radius: 2px;
+  box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  background: #3498db;
+  color: #000;
+}
+.wrapper {
+  display: flex;
+  height: 400px;
+  width: 400px;
+}
+.box {
+  position: relative;
+  flex-basis: 25%;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:nth-child(even) {
+    background-color: transparent;
+  }
+  &:nth-child(odd) {
+    background-color: antiquewhite;
+  }
+  span {
+    font-weight: 700;
+    font-size: 30px;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.5s ease-in-out;
+  }
+  &:hover {
+    flex-basis: 100%;
+    span {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+```

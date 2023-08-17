@@ -1,0 +1,168 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#10` [Watch](https://100dayscss.com/days/10/)
+
+Watch: Classic, noble, modern or playful? What do you want your favorite watch to look like?
+
+## CodePen
+
+> See the Pen [#10 CSS Challenge / Watch](https://codepen.io/mulander/pen/dywbQMJ)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#10 CSS Challenge / Watch"
+  src="https://codepen.io/mulander/embed/dywbQMJ?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Learn
+
+### [@property](https://developer.mozilla.org/en-US/docs/Web/CSS/@property)
+
+The `@property` CSS at-rule is part of the CSS Houdini umbrella of APIs. It allows developers to explicitly define their CSS custom properties, allowing for property type checking and constraining, setting default values, and defining whether a custom property can inherit values or not.
+
+The `@property` rule represents a custom property registration directly in a stylesheet without having to run any JS. Valid `@property` rules result in a registered custom property, as if `registerProperty()` had been called with equivalent parameters.
+
+**Syntax**
+
+```yaml
+@property --property-name {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #c0ffee;
+}
+```
+
+
+**Hint**
+
+When using `calc()` and variables in scss, they need to be wrapped in `#{var}`
+
+
+## Code
+
+```html
+// pug
+
+.frame
+	.clock
+		.main
+			.date Mon 15 Jan 2015
+			.time 11:42
+			.stats
+				.beat
+					i.fa.fa-heart
+					| 86
+				.energy 1248 kcal
+```
+
+```css
+$gap: 4px;
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.15);
+	overflow: hidden;
+	background: #4c4c4c;
+	color: #ffffff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.clock {
+	position: relative;
+	width: 200px;
+	height: 200px;
+	padding: $gap * 3;
+	border-radius: 50%;
+	border: 6px solid #3a3a3a;
+	background: black;
+	box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.15);
+	overflow: hidden;
+	font-size: 12px;
+}
+.clock::before {
+	content: "";
+	position: absolute;
+	top: $gap;
+	left: $gap;
+	width: calc(100% - #{$gap * 2});
+	height: calc(100% - #{$gap * 2});
+	border-radius: 50%;
+	background: conic-gradient(
+		#f85b5b calc(var(--angle, 0) * 1turn),
+		rgba(255, 255, 255, 0.2) 0turn
+	);
+	animation: an-ring 5s linear infinite, an-ring-color 10s linear infinite;
+}
+@property --angle {
+	syntax: "<number>";
+	inherits: false;
+	initial-value: 0;
+}
+@keyframes an-ring {
+	to {
+		--angle: 1;
+	}
+}
+@keyframes an-ring-color {
+	to {
+		filter: hue-rotate(180deg) brightness(1.6);
+	}
+}
+
+.main {
+	position: relative;
+	z-index: 2;
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+	color: #ffffff;
+	background: black;
+	border: 2px dotted white;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 0 0 $gap black;
+	.time {
+		font-weight: 700;
+		font-size: 40px;
+		line-height: 100%;
+		margin: 4px 0;
+	}
+	.stats {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 20px;
+		i.fa {
+			color: #f85b5b;
+			margin-right: 4px;
+		}
+	}
+}
+```

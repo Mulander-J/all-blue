@@ -1,0 +1,154 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#11` [Walking Boots](https://100dayscss.com/days/11/)
+
+Walking Boots: These boots are made for walking. Where are they going and for how long?
+
+## CodePen
+
+> See the Pen [#11 CSS Challenge / Walking Boots](https://codepen.io/mulander/pen/BavazPg)
+> by Mulander ([@mulander](https://codepen.io/mulander))
+> on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#11 CSS Challenge / Walking Boots"
+  src="https://codepen.io/mulander/embed/BavazPg?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+<div class="frame">
+  <div class="wrapper">
+    <div class="leg left">
+      <div class="shoe"></div>
+    </div>
+    <div class="leg right">
+      <div class="shoe"></div>
+    </div>
+  </div>
+  <div class="floor"></div>
+</div>
+```
+
+```css
+.frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  margin-top: -200px;
+  margin-left: -200px;
+  border-radius: 2px;
+  box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+  background: rgb(155, 218, 160);
+  background: radial-gradient(
+    ellipse at center,
+    rgb(215, 246, 222) 0%,
+    rgb(155, 218, 160) 100%
+  );
+  overflow: hidden;
+}
+
+.floor {
+  position: absolute;
+  top: 244px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: conic-gradient(
+      white 0.25turn,
+      black 0.25turn 0.5turn,
+      white 0.5turn 0.75turn,
+      black 0.75turn
+    ) top left / 25% 25% repeat;
+  animation: road-past 1s 0.8s ease-in-out infinite;
+}
+
+.wrapper {
+  opacity: 0;
+  animation: fade-in 0.8s ease-out 1s both;
+}
+
+.leg {
+  position: absolute;
+  top: 0px;
+  left: 147px;
+  width: 151px;
+  height: 245px;
+  transform-origin: 50% 0;
+}
+
+.shoe {
+  position: absolute;
+  width: 151px;
+  height: 128px;
+  left: 0;
+  bottom: 0;
+  background: url("https://100dayscss.com/codepen/doc-martens.svg") center
+    center no-repeat;
+  transform-origin: 0 95%;
+}
+.left {
+  animation: leg-swing 2s ease-in-out infinite;
+}
+.left .shoe {
+  animation: shoe-turn 2s ease-in-out infinite;
+}
+.right {
+  animation: leg-swing 2s ease-in-out 1s infinite;
+}
+.right .shoe {
+  animation: shoe-turn 2s ease-in-out 1s infinite;
+}
+
+@keyframes road-past {
+  from {
+    background-position-x: 0%;
+  }
+  to {
+    background-position-x: -100%;
+  }
+}
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes leg-swing {
+  0%,
+  100% {
+    transform: rotate(-22deg);
+  }
+  50% {
+    transform: rotate(40deg);
+  }
+}
+@keyframes shoe-turn {
+  0%,
+  100% {
+    transform: rotate(-10deg) translateY(-5px) translateX(10px);
+  }
+  25% {
+    transform: rotate(0deg) translateY(0px) translateX(0);
+  }
+  50% {
+    transform: rotate(10deg) translateY(-10px) translateX(10px);
+  }
+  75% {
+    transform: rotate(0deg) translateY(-30px) translateX(0);
+  }
+}
+```

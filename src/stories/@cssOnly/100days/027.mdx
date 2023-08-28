@@ -1,0 +1,177 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#27` [Checklist](https://100dayscss.com/days/27/)
+
+Checklist: What&#x27;s the great thing about working through your to-do list? That&#x27;s right, the relieving feeling when you can check off the tasks.
+
+## CodePen
+
+> See the Pen [#27 CSS Challenge / Checklist](https://codepen.io/mulander/pen/poqgeaz)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#27 CSS Challenge / Checklist"
+  src="https://codepen.io/mulander/embed/poqgeaz?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Learn
+
+[transition-delay](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay)
+
+The `transition-delay` CSS property specifies the duration to wait before starting a property's transition effect when its value changes.
+
+**Syntax**
+
+```yaml
+/* <time> values */
+transition-delay: 3s;
+transition-delay: 2s, 4ms;
+
+/* Global values */
+transition-delay: inherit;
+transition-delay: initial;
+transition-delay: revert;
+transition-delay: revert-layer;
+transition-delay: unset;
+```
+
+## Code
+
+```html
+// pug
+
+.frame: .todo
+	.header
+		h4 friday
+		h3 march 4,2016
+	.list
+		- for(let i = 0; i < 4; i++)
+			li.item
+				input(type="checkbox", name='do-' + i, id="do-"+i)
+				label.item-slot(for='do-' + i)
+					div ToDo
+					.checker: svg(width="15px" height="10px"): polyline(points="1,5 6,9 14,1" stroke="currentColor" fill="none")
+```
+
+```css
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+ul.list,
+li.item {
+	list-style: none;
+}
+.item input[type="checkbox"] {
+	appearance: none;
+}
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	font-family: "Open Sans", Helvetica, sans-serif;
+	background: linear-gradient(to top right, #fda231 0%, #fdca31 100%);
+	color: #fff;
+}
+.todo {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 240px;
+	padding: 0 30px;
+	background: #ffffff;
+	color: #497081;
+	box-shadow: 4px 8px 12px 0px rgba(0, 0, 0, 0.1);
+	border-radius: 3px;
+}
+.header {
+	padding: 20px 0;
+	text-align: center;
+	text-transform: capitalize;
+	border-bottom: 1px solid #d4dce0;
+	h4 {
+		font-weight: 600;
+		font-size: 20px;
+		line-height: 30px;
+		text-align: center;
+	}
+	h3 {
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 18px;
+		text-align: center;
+	}
+}
+
+.list {
+	display: grid;
+	gap: 20px;
+	padding-bottom: 20px;
+	.item {
+		.item-slot {
+			cursor: pointer;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			color: #497081;
+			transition: all 0.3s ease-in-out;
+			.checker {
+				position: relative;
+				width: 15px;
+				height: 15px;
+				&::after {
+					content: "";
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					border-radius: 50%;
+					border: 1px solid;
+					top: 0;
+					left: 0;
+					transition: all 0.4s ease-in 0.5s;
+				}
+				svg polyline {
+					stroke-dasharray: 0 30;
+					transition: all 0.5s ease-out;
+				}
+			}
+		}
+		input[type="checkbox"]:checked ~ .item-slot {
+			color: #c8d4d9;
+			.checker {
+				&::after {
+					transition: all 0.4s ease-in;
+					transform: scale(1.5);
+					transform-origin: center center;
+					opacity: 0;
+				}
+				svg polyline {
+					stroke-dasharray: 30 30;
+					transition: all 0.5s ease-out 0.4s;
+				}
+			}
+		}
+	}
+}
+```

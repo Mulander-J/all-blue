@@ -1,0 +1,108 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#31` [Pendulum Wave](https://100dayscss.com/days/31/)
+
+Pendulum Wave: If you are not yet fascinated by mathematics, you should be now at the latest. Wonderful what a small calculations brings forth.
+
+## CodePen
+
+> See the Pen [#31 CSS Challenge / Pendulum Wave](https://codepen.io/mulander/pen/wvRMqZb)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#31 CSS Challenge / Pendulum Wave"
+  src="https://codepen.io/mulander/embed/wvRMqZb?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+// pug
+
+.frame: .dots
+	- for(let i = 0; i < 20; i++)
+		.dot
+```
+
+```css
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	font-family: "Open Sans", Helvetica, sans-serif;
+	background: skyblue;
+	color: #fff;
+}
+
+$total: 20;
+$dur: 60;
+$gap: $dur - $total;
+
+.dots {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: grid;
+	gap: 4px;
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 50%;
+		height: 100%;
+		width: 2px;
+		border-radius: 50%;
+		background: linear-gradient(to bottom, transparent, white, transparent, black)
+			100% 200%;
+		animation: line 1s linear infinite both;
+	}
+	.dot {
+		display: block;
+		height: 12px;
+		width: 12px;
+		border-radius: 50%;
+		background: linear-gradient(45deg, black, transparent);
+		@for $i from 1 through $total {
+			&:nth-child(#{$i}) {
+				animation: move ($dur / ($gap + $i)) + s ease-in-out infinite alternate;
+			}
+			&:nth-child(even) {
+				background: linear-gradient(45deg, white, transparent);
+			}
+		}
+	}
+}
+@keyframes move {
+	0% {
+		transform: translateX(-50px);
+	}
+	100% {
+		transform: translateX(50px);
+	}
+}
+@keyframes line {
+	to {
+		background-position-y: 316px;
+	}
+}
+```

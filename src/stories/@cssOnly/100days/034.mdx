@@ -1,0 +1,136 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#34` [Hello](https://100dayscss.com/days/34/)
+
+Hello: Yes, another animation of some text. But this time I used SVGs as a base. What kind of animation will you make?
+
+## CodePen
+
+> See the Pen [#34 CSS Challenge / Hello](https://codepen.io/mulander/pen/Yzdwomp)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#34 CSS Challenge / Hello"
+  src="https://codepen.io/mulander/embed/Yzdwomp?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+<div class="frame">
+	<div class="center">
+		<svg viewBox="0 0 1000 300">
+			<use href="#line-text" class="text"></use>
+			<use href="#line-text" class="text"></use>
+			<symbol id="line-text">
+				<text text-anchor="middle" x="50%" y="50%" dy=".4em">hello</text>
+			</symbol>
+		</svg>
+	</div>
+</div>
+```
+
+```css
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	font-family: "Open Sans", Helvetica, sans-serif;
+	background: #EA4C89;
+	color: #fff;
+}
+.center {
+	position: absolute;
+	width: 180px;
+	height: 40px;
+	padding: 10px;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	font-size: 16rem;
+	font-weight: 800;
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 2px;
+		left: 0;
+		background: #fff;
+		animation: line 0.8s ease both;
+	}
+	&::before {
+		top: -2px;
+	}
+	&::after {
+		bottom: -2px;
+	}
+}
+
+@keyframes line {
+	from {
+		transform: scaleX(0);
+	}
+	to {
+		transform: scaleX(1);
+	}
+}
+
+svg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	.text {
+		fill: transparent;
+		stroke-width: 20px;
+		&:nth-child(n + 1) {
+			stroke: rgb(39, 153, 238);
+			stroke-dasharray: 0 600;
+			animation: text 3.8s ease-in-out infinite;
+		}
+		&:nth-child(n + 2) {
+			stroke: rgb(126 15 213);
+			animation: text2 3.8s ease-in-out infinite;
+		}
+	}
+}
+
+@keyframes text {
+	100% {
+		stroke-dasharray: 1200 600;
+		fill: rgba(255, 255, 255, 0.6);
+	}
+}
+@keyframes text2 {
+	90% {
+		stroke-dasharray: 1200 600;
+		stroke-dashoffset: 800;
+	}
+	100% {
+		stroke: rgb(39, 153, 238);
+	}
+}
+```

@@ -1,0 +1,96 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#38` [Logo Transition](https://100dayscss.com/days/38/)
+
+Logo Transition: Logos don&#x27;t always have to be static, as a transition or stylistic element they can have animations.
+
+## CodePen
+
+> See the Pen [#38 CSS Challenge / Logo Transition](https://codepen.io/mulander/pen/MWZyOqB)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#38 CSS Challenge / Logo Transition"
+  src="https://codepen.io/mulander/embed/MWZyOqB?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+<div class="frame">
+	<div class="logo" onclick="
+        this.style.setProperty('--c1', 'hsla('+  Math.floor(Math.random()*360) +',100%,50%,1)');
+        this.style.setProperty('--c2', 'hsla('+  Math.floor(Math.random()*360) +',100%,50%,1)');
+        this.classList.toggle('active');
+      ">
+		<div class="prev"></div>
+		<div class="next"></div>
+	</div>
+</div>
+```
+
+```css
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	font-family: "Open Sans", Helvetica, sans-serif;
+}
+.logo {
+	cursor: pointer;
+	user-select: none;
+	width: 400px;
+	height: 400px;
+	--c1: #9b59b6;
+	--c2: #fff;
+	background: var(--c1);
+	.prev,
+	.next {
+		position: absolute;
+		top: 160px;
+		left: 165px;
+		height: 80px;
+		width: 70px;
+		transition: background 0.8s ease, transform 1s ease-in-out;
+		clip-path: path(
+			"M-4.67739102e-15,21.1739614 L-5.32907052e-15,20 L34.6410162,0 L69.2820323,20 L69.2820323,21.1739614 C65.1281093,26.3215737 62.6410162,32.870341 62.6410162,40 C62.6410162,47.129659 65.1281093,53.6784263 69.2820323,58.8260386 L69.2820323,60 L34.6410162,80 L1.687539e-14,60 L1.62237105e-14,58.8260386 C4.15392303,53.6784263 6.64101615,47.129659 6.64101615,40 C6.64101615,32.870341 4.15392303,26.3215737 2.88213897e-13,21.1739614 Z"
+		);
+	}
+	.prev {
+		background: var(--c2);
+		transform: scale(1);
+	}
+	.next {
+		background: var(--c1);
+		transform: scale(0);
+	}
+}
+
+.active {
+	.prev {
+		transform: scale(10);
+	}
+	.next {
+		transform: scale(1);
+	}
+}
+```

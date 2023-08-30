@@ -1,0 +1,105 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#35` [Loading Circle](https://100dayscss.com/days/35/)
+
+Loading Circle: Is that a dark circle with a white stripe or the other way around?
+
+## CodePen
+
+> See the Pen [#35 CSS Challenge / Loading Circle](https://codepen.io/mulander/pen/YzdqQYP)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#35 CSS Challenge / Loading Circle"
+  src="https://codepen.io/mulander/embed/YzdqQYP?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+<div class="frame">
+	<div class="center">
+		<svg class="progress" fill="none">
+			<circle cx="50" cy="50" r="45" stroke="rgba(0,0,0,.4)" stroke-width="10px"></circle>
+			<circle class="line" cx="50" cy="50" r="45" stroke="black" stroke-width="10px" stroke-linecap="round">
+				<animate attributeName="stroke-dashoffset" values="314;-314" dur="4" repeatCount="indefinite" calcMode="linear" />
+			</circle>
+		</svg>
+		<div class="underline"></div>
+		<p>HarmonyOS</p>
+	</div>
+</div>
+```
+
+```css
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	font-family: "Open Sans", Helvetica, sans-serif;
+	background: #1bbe9e;
+	color: #000;
+}
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	.progress {
+		height: 100px;
+		width: 100px;
+		.line {
+			transform: rotate(-90deg);
+			transform-origin: center center;
+			stroke-dasharray: 314;
+			animation: rotate 3s linear both infinite;
+		}
+	}
+
+	.underline {
+		transform-origin: 0 0;
+		margin: 20px 10px;
+		height: 10px;
+		width: 80px;
+		background: #2468f5;
+		& ~ p {
+			margin: 0;
+			letter-spacing: 4px;
+			font-weight: 800;
+			font-size: 20px;
+		}
+	}
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(-90deg);
+	}
+	to {
+		transform: rotate(270deg);
+	}
+}
+```

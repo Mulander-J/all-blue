@@ -1,0 +1,134 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#41` [Error Modal](https://100dayscss.com/days/41/)
+
+Error Modal: Don&#x27;t worry, it&#x27;s not a real error, this is part of the challenge.
+
+## CodePen
+
+> See the Pen [#41 CSS Challenge / Error Modal](https://codepen.io/mulander/pen/QWzNerJ)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#41 CSS Challenge / Error Modal"
+  src="https://codepen.io/mulander/embed/QWzNerJ?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+<div class="frame">
+	<div class="notify">
+		<h3>Oh snap!</h3>
+		<p>An error has occured while creating an error report.</p>
+		<button onclick="document.querySelector('.notify').classList.toggle('hide')">dismiss</button>
+	</div>
+	<button onclick="document.querySelector('.notify').classList.toggle('hide')">toggle</button>
+</div>
+```
+
+```css
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	font-family: "Open Sans", Helvetica, sans-serif;
+	background: #3f3f3f;
+	color: #415868;
+}
+
+.notify {
+	position: absolute;
+	left: 40px;
+	top: 100px;
+	width: 320px;
+	background: #fefefe;
+	text-align: center;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	animation: show 1.2s ease both;
+	&.hide {
+		animation: show-rev 1.2s ease both reverse;
+	}
+	h3 {
+		font-size: 18px;
+		line-height: 24px;
+		font-weight: 400;
+		margin: 14px 0 5px 0;
+	}
+	p {
+		font-size: 14px;
+		font-weight: 300;
+		line-height: 19px;
+		margin: 20px 0;
+		padding: 0 30px;
+	}
+}
+
+button {
+	outline: none;
+	border: none;
+	appearance: none;
+	height: 40px;
+	width: 100%;
+	background: hsl(0, 90%, 65%);
+	color: #fff;
+	line-height: 40px;
+	font-size: 14px;
+	font-weight: 400;
+	text-transform: capitalize;
+	cursor: pointer;
+	transition: background 0.3s ease-in-out;
+	&:hover {
+		background: hsl(0, 90%, 45%);
+	}
+}
+
+@keyframes show {
+	0% {
+		transform: scale(0);
+	}
+	60% {
+		transform: scale(1.1);
+	}
+	80% {
+		transform: scale(0.95);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes show-rev {
+	0% {
+		transform: scale(0);
+	}
+	60% {
+		transform: scale(1.1);
+	}
+	80% {
+		transform: scale(0.95);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+```

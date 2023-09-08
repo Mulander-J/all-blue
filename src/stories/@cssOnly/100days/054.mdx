@@ -1,0 +1,104 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#54` [Waves](https://100dayscss.com/days/54/)
+
+Waves: Even the smallest animations and tweeks, can have a large impact. For example a mesmerizing background animation.
+
+## CodePen
+
+> See the Pen [#54 CSS Challenge / Waves](https://codepen.io/mulander/pen/wvRgEQo)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#54 CSS Challenge / Waves"
+  src="https://codepen.io/mulander/embed/wvRgEQo?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Learn
+
+Sass [Lists](https://sass-lang.com/documentation/values/lists/) & [Maps](https://sass-lang.com/documentation/values/maps/)
+
+## Code
+
+```html
+// pug
+
+.frame
+	- for(let i = 0; i < 3; i++)
+		.wave
+			- for(let j = 0; j < 10; j++)
+				.circle
+```
+
+```css
+$colors: (
+	(hsl(209, 34%, 23%)),
+	(hsl(209, 35%, 38%)),
+	(hsl(229, 35%, 38%)),
+	(hsl(249, 35%, 38%))
+);
+
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	background: nth($colors, 1);
+}
+.wave {
+	position: absolute;
+	height: 100px;
+	background: hsl(209, 35%, 38%);
+	display: flex;
+	flex-wrap: nowrap;
+	@for $i from 1 through length($colors) - 1 {
+		&:nth-of-type(#{$i}) {
+			top: 180px + ($i * 60px);
+			animation: wave
+				2s
+				ease-in-out
+				if($i % 2 == 0, alternate-reverse, alternate)
+				infinite;
+			--bg: #{nth($colors, $i)};
+			--wave: #{nth($colors, $i + 1)};
+			background: var(--wave);
+		}
+	}
+}
+.circle {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	transform: translateY(-50%);
+	&:nth-child(even) {
+		background-color: var(--wave);
+	}
+	&:nth-child(odd) {
+		background: var(--bg);
+	}
+}
+
+@keyframes wave {
+	to {
+		transform: translateX(-100px);
+	}
+}
+```

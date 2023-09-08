@@ -1,0 +1,95 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#52` [Dot Wave](https://100dayscss.com/days/52/)
+
+Dot Wave: I feel like I go into hypnosis if I stare at it too long.
+
+## CodePen
+
+> See the Pen [#52 CSS Challenge / Dot Wave](https://codepen.io/mulander/pen/XWopBdX)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#52 CSS Challenge / Dot Wave"
+  src="https://codepen.io/mulander/embed/XWopBdX?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Learn
+
+## Code
+
+```html
+<div class="frame">
+	<div class="ring"></div>
+	<div class="ring"></div>
+	<div class="ring"></div>
+	<div class="ring"></div>
+	<div class="ring"></div>
+	<div class="ring"></div>
+	<div class="ring"></div>
+	<div class="ring"></div>
+	<div class="ring"></div>
+	<div class="ring"></div>
+</div>
+```
+
+```css
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	background: #000;
+	perspective: 100px;
+}
+.ring {
+	position: absolute;
+	aspect-ratio: 1/1;
+	top: 50%;
+	left: 50%;
+	border-radius: 50%;
+	transform-style: preserve-3d;
+	border: 0px dotted white;
+	opacity: 0;
+	transform: translate3d(-50%, -50%, 0) rotate(0);
+	box-shadow: inset 0 0 4px 2px #0f0, 0 0 4px 1px #0f0;
+	@for $i from 1 through 10 {
+		&:nth-of-type(#{$i}) {
+			height: #{(80 + $i * 20)}px;
+			animation: blink2 2s #{$i / 3}s ease-in-out infinite both;
+		}
+	}
+}
+
+@keyframes blink2 {
+	0%,
+	100% {
+		border: 0px dotted #fff;
+		opacity: 0;
+		transform: translate3d(-50%, -50%, 0) rotate(0);
+	}
+	50% {
+		border: 8px dotted #ff0;
+		opacity: 1;
+		transform: translate3d(-50%, -50%, 10px) rotate(90deg);
+	}
+}
+```

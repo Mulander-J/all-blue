@@ -1,0 +1,64 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#61` [CSS Gradient Transition](https://100dayscss.com/days/61/)
+
+CSS Gradient Transition: A recurring trend, gradients have often been pronounced dead and yet appear anew.
+
+## CodePen
+
+> See the Pen [#61 CSS Challenge / CSS Gradient Transition](https://codepen.io/mulander/pen/PoXmOaa)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#61 CSS Challenge / CSS Gradient Transition"
+  src="https://codepen.io/mulander/embed/PoXmOaa?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+<div class="frame"></div>
+```
+
+```css
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	background: linear-gradient(135deg, #77c8c0 0%, #267aac 100%);
+}
+.frame::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(135deg, #4ad7b8 0%, #f39c12 100%);
+	animation: fade 2s ease alternate both infinite;
+}
+@keyframes fade {
+	to {
+		opacity: 0;
+	}
+}
+```

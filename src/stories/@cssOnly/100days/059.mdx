@@ -1,0 +1,135 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#59` [Slice Transition](https://100dayscss.com/days/59/)
+
+Slice Transition: Not the everyday transition between two images.
+
+## CodePen
+
+> See the Pen [#59 CSS Challenge / Slice Transition](https://codepen.io/mulander/pen/LYMyeXJ)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#59 CSS Challenge / Slice Transition"
+  src="https://codepen.io/mulander/embed/LYMyeXJ?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+// pug
+
+.frame: .card
+	- for(let i = 0; i < 10; i++)
+		.slice
+	.text
+		h1 Slice
+		h2 Transition
+```
+
+```css
+* {
+	margin: 0;
+	padding: 0;
+}
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	background: skyblue;
+	color: #fff;
+}
+
+$count: 10;
+$width: 400px / $count;
+$offset: 40px;
+
+.card {
+	position: absolute;
+	width: 400px;
+	height: 400px;
+	background: url("https://100dayscss.com/codepen/slice-image-1.jpg") center
+		center no-repeat;
+	background-size: 400px 400px;
+	cursor: pointer;
+	display: grid;
+	grid-template-columns: repeat($count, 1fr);
+	&:hover {
+		.text {
+			h2 {
+				transform: translateX(1 * $offset);
+				opacity: 0;
+			}
+			h1 {
+				transform: translateX(-1 * $offset);
+				opacity: 0;
+			}
+		}
+		.slice {
+			transform: translateY(0) !important;
+			opacity: 1;
+		}
+	}
+	.text {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-transform: uppercase;
+		font-weight: 700;
+		text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+		h1 {
+			font-size: 60px;
+			line-height: 60px;
+			transition: all 1s ease-in-out;
+			transform: translateX(0);
+		}
+		h2 {
+			font-size: 40px;
+			line-height: 40px;
+			transition: all 1s ease-in-out;
+			transform: translateX(0);
+		}
+	}
+	.slice {
+		height: 100%;
+		width: $width;
+		z-index: 2;
+		opacity: 0;
+		box-sizing: border-box;
+		background: url("https://100dayscss.com/codepen/slice-image-2.jpg") no-repeat;
+		background-size: 400px 400px;
+		transition: all 1s ease-in-out;
+		&:nth-of-type(even) {
+			transform: translateY($offset);
+		}
+		&:nth-of-type(odd) {
+			transform: translateY(-1 * $offset);
+		}
+		@for $i from 1 through $count {
+			&:nth-of-type(#{$i}) {
+				background-position: (-1 * ($i - 1) * $width) 0;
+			}
+		}
+	}
+}
+```

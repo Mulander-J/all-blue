@@ -1,0 +1,177 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#62` [Price Table](https://100dayscss.com/days/62/)
+
+Price Table: Don&#x27;t worry, 100 Days CSS is free. For everything else, you have these sample pricing tables.
+
+## CodePen
+
+> See the Pen [#62 CSS Challenge / Price Table](https://codepen.io/mulander/pen/dywWdWx)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#62 CSS Challenge / Price Table"
+  src="https://codepen.io/mulander/embed/dywWdWx?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+<div class="frame">
+	<div class="plans">
+		<div class="plan">
+			<div class="head">Basic</div>
+			<div class="ctx">
+				<div class="price">$5</div>
+				<div class="unit">per month</div>
+			</div>
+		</div>
+		<div class="plan">
+			<div class="head">Basic</div>
+			<div class="ctx">
+				<div class="price">$5</div>
+				<div class="unit">per month</div>
+			</div>
+		</div>
+		<div class="plan">
+			<div class="head">Basic</div>
+			<div class="ctx">
+				<div class="price">$5</div>
+				<div class="unit">per month</div>
+			</div>
+		</div>
+
+		<div class="data">
+			<div class="row">
+				<div class="range">
+					<label>5 Users</label>
+					<label>100 Users</label>
+				</div>
+				<div class="line"></div>
+			</div>
+		</div>
+	</div>
+</div>
+```
+
+```css
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	background: #e9edef;
+}
+.plans {
+	display: grid;
+	padding: 20px;
+	gap: 10px;
+	grid-template-columns: repeat(3, 1fr);
+	.plan {
+		cursor: pointer;
+		transition: all 0.3s ease-in-out;
+		.head {
+			height: 36px;
+			text-align: center;
+			background: #7dd0ed;
+			color: #fff;
+			font-weight: 600;
+			line-height: 36px;
+			font-size: 14px;
+			transition: all 0.3s ease-in-out;
+		}
+		.ctx {
+			background: #fff;
+			color: #5e5e5e;
+			padding: 16px 0;
+			text-align: center;
+			.price {
+				text-align: center;
+				font-size: 30px;
+				line-height: 30px;
+				font-weight: 700;
+				transition: all 0.3s ease-in-out;
+			}
+			.unit {
+				font-size: 12px;
+				line-height: 12px;
+				font-weight: 400;
+			}
+		}
+		&:hover {
+			transform: scale(1.1) translate3d(0, 0, 0);
+			box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.1);
+			.head {
+				background: #27a6d2;
+			}
+			.price {
+				color: #27a6d2;
+			}
+		}
+		@for $i from 1 through 3 {
+			&:nth-child(#{$i}):hover ~ .data .row .line::after {
+				width: $i * 30%;
+			}
+		}
+	}
+}
+
+.data {
+	position: absolute;
+	width: 380px;
+	top: 220px;
+	left: 10px;
+	padding: 16px;
+	background: #fff;
+	box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.1);
+	.row {
+		.range {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.line {
+			height: 8px;
+			position: relative;
+			margin-top: 4px;
+			background: #e9edef;
+			width: 100%;
+			border-radius: 4px;
+			&::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				border-radius: 4px;
+				width: 0%;
+				background: #27a6d2;
+				transition: all 0.3s ease;
+			}
+		}
+	}
+}
+```

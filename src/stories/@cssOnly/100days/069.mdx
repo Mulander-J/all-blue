@@ -1,0 +1,136 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#69` [Eye](https://100dayscss.com/days/69/)
+
+Eye: Do you also feel a little observed? Why not give that eye a few chic eyelashes?
+
+## CodePen
+
+> See the Pen [#69 CSS Challenge / Eye](https://codepen.io/mulander/pen/gOZRrpY)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#69 CSS Challenge / Eye"
+  src="https://codepen.io/mulander/embed/gOZRrpY?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+<div class="frame">
+	<div class="eye">
+		<div class="lid">
+			<div class="ball"></div>
+		</div>
+	</div>
+</div>
+```
+
+```css
+$c_bg: #363847;
+$c_eye: #d8d8d8;
+
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	background: $c_bg;
+}
+.eye {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) rotate(45deg);
+	width: 160px;
+	height: 160px;
+	border-radius: 100% 0;
+	background: $c_bg;
+	overflow: hidden;
+}
+.ball {
+	position: absolute;
+	top: 73.45px;
+	left: 73.45px;
+	height: 80px;
+	width: 80px;
+	border-radius: 50%;
+	box-sizing: border-box;
+	border: 20px solid #fff;
+	background: radial-gradient(
+		#418d2c,
+		#5faf4a,
+		#6ba44b,
+		#86a414,
+		#4f7135,
+		#273120,
+		#148977,
+		#1eb6bb
+	);
+	animation: ball 3s ease-in-out both infinite;
+}
+.lid {
+	position: absolute;
+	top: -21%;
+	left: -21%;
+	width: 141%;
+	height: 141%;
+	transform: rotate(45deg);
+	background: $c_eye;
+	clip-path: ellipse(22% 50% at 50% 50%);
+	animation: lid 3s ease-in-out both infinite;
+}
+@keyframes lid {
+	0%,
+	10%,
+	18%,
+	26%,
+	34%,
+	48%,
+	56%,
+	76%,
+	84%,
+	100% {
+		clip-path: ellipse(22% 50% at 50% 50%);
+	}
+	14%,
+	30%,
+	52%,
+	80% {
+		clip-path: ellipse(0% 50% at 50% 50%);
+	}
+}
+@keyframes ball {
+	0%,
+	14%,
+	56% {
+		transform: rotate(-45deg) translateX(0);
+	}
+	18%,
+	30% {
+		transform: rotate(-45deg) translate(-25px, 5px) scale(0.9);
+	}
+	34%,
+	52% {
+		transform: rotate(-45deg) translate(25px, 10px) scale(0.9);
+	}
+}
+```

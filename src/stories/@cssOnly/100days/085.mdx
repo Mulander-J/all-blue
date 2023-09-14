@@ -1,0 +1,89 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#85` [It&#x27;s something](https://100dayscss.com/days/85/)
+
+It&#x27;s something: I really don&#x27;t know what this should be. But is it rotating or just going up and down for you?
+
+## CodePen
+
+> See the Pen [#85 CSS Challenge / It&#x27;s something](https://codepen.io/mulander/pen/GRPEwWW)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#85 CSS Challenge / It&#x27;s something"
+  src="https://codepen.io/mulander/embed/GRPEwWW?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+<div class="frame">
+	<div class="left"></div>
+</div>
+```
+
+```css
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	background: #333;
+	transform-style: preserve-3d;
+}
+.left {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+	transform: rotateX(0);
+	transform-origin: 200px 200px;
+	animation: swing 2s linear both alternate infinite;
+	-webkit-box-reflect: right -4px;
+	color: #fff;
+}
+.left::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: 400px;
+	width: 400px;
+	border: 4px dotted;
+	border-radius: 50%;
+}
+@keyframes swing {
+	0% {
+		transform: rotateX(30deg);
+		opacity: 1;
+		color: #0f0;
+	}
+	50% {
+		opacity: 0;
+		color: #fff;
+	}
+	100% {
+		opacity: 1;
+		color: #f00;
+		transform: rotateX(150deg);
+	}
+}
+```

@@ -1,0 +1,155 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#87` [Ruby](https://100dayscss.com/days/87/)
+
+Ruby: Shine bright like a diamond...uh...ruby. Look carefully and don&#x27;t forget the polish.
+
+## CodePen
+
+> See the Pen [#87 CSS Challenge / Ruby](https://codepen.io/mulander/pen/VwqWReL)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#87 CSS Challenge / Ruby"
+  src="https://codepen.io/mulander/embed/VwqWReL?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+<div class="frame">
+	<div class="ruby">
+		<div class="top">
+			<div class="tri-1"></div>
+			<div class="tri-2"></div>
+			<div class="tri-3"></div>
+			<div class="append"></div>
+		</div>
+		<div class="bottom">
+			<div class="tri-4"></div>
+			<div class="tri-5"></div>
+			<div class="tri-6"></div>
+		</div>
+	</div>
+</div>
+```
+
+```css
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	background: #ffc902;
+}
+.ruby {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	left: 100px;
+	top: 100px;
+	&:hover .append::after {
+		right: -150%;
+		opacity: 0.2;
+	}
+}
+.top {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 1.56fr 1fr;
+	height: 42px;
+	.tri-1 {
+		z-index: 2;
+		background: #9e0707;
+		clip-path: polygon(0 100%, 59.3% 0%, 100% 100%);
+	}
+	.tri-3 {
+		z-index: 2;
+		background: #b90b0c;
+		clip-path: polygon(0 100%, 40.7% 0%, 100% 100%);
+	}
+	.tri-2 {
+		z-index: 2;
+		background: #bc0e0e;
+		clip-path: polygon(0 100%, 50% 0%, 100% 100%);
+	}
+	.append {
+		position: absolute;
+		z-index: 1;
+		left: 16.6575%;
+		height: 100%;
+		width: 66.685%;
+		overflow: hidden;
+		background: linear-gradient(
+			to right,
+			#dc2323,
+			#dc2323 50%,
+			#f58181 50%,
+			#f58181
+		);
+		&::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			right: -230%;
+			width: 400%;
+			height: 4px;
+			background: #ffdfdf;
+			box-shadow: 0 0 5px 0 #ffdfdf;
+			transform-origin: center center;
+			transform: rotate(45deg);
+			transition: all 0.4s ease;
+		}
+	}
+}
+
+.bottom {
+	position: absolute;
+	height: 84px;
+	width: 100%;
+	top: 41px;
+	.tri-4 {
+		position: absolute;
+		left: 0;
+		height: 100%;
+		width: 50%;
+		background: #890505;
+		clip-path: polygon(0 0, 56% 0%, 100% 100%);
+	}
+	.tri-5 {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		height: 100%;
+		width: 43.82%;
+		background: #a51012;
+		clip-path: polygon(0 0, 100% 0, 50% 100%);
+	}
+	.tri-6 {
+		position: absolute;
+		right: 0;
+		height: 100%;
+		width: 50%;
+		background: #c81718;
+		clip-path: polygon(100% 0, 44% 0%, 0% 100%);
+	}
+}
+```

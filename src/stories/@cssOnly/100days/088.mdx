@@ -1,0 +1,123 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#88` [Candle](https://100dayscss.com/days/88/)
+
+Candle: Thanks to the magic of border-radius, this flame is animated by CSS only. It looks way better than I would have imagined.
+
+## CodePen
+
+> See the Pen [#88 CSS Challenge / Candle](https://codepen.io/mulander/pen/mdaMOay)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#88 CSS Challenge / Candle"
+  src="https://codepen.io/mulander/embed/mdaMOay?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+<div class="frame">
+	<div class="center">
+		<div class="fire"></div>
+		<div class="candle"></div>
+	</div>
+</div>
+```
+
+```css
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	background: radial-gradient(#666, #2c3e50);
+}
+.center {
+	position: absolute;
+	top: 125px;
+	left: 130px;
+	width: 120px;
+	height: 150px;
+}
+.candle {
+	position: relative;
+	margin: 0 auto;
+	width: 60px;
+	height: 100px;
+	border-radius: 3px;
+	background: linear-gradient(
+		to right,
+		#fefefe,
+		#fefefe 90%,
+		#e0e5ff 90%,
+		#e0e5ff
+	);
+}
+.candle::after {
+	content: "";
+	position: absolute;
+	width: 120px;
+	height: 8px;
+	bottom: -8px;
+	left: -50%;
+	border-radius: 3px;
+	background: #1b233e;
+}
+.fire {
+	position: relative;
+	width: 16px;
+	height: 26px;
+	margin: 0 auto 10px;
+	background: #ffad00;
+	border-radius: 8px /20px 20px 8px 8px;
+	animation: flame 10s ease-in-out both infinite;
+}
+.fire::after {
+	content: "";
+	position: absolute;
+	width: 4px;
+	height: 15px;
+	bottom: -15px;
+	left: 6px;
+	background: #ad88a9;
+	border-radius: 2px 2px 0 0;
+}
+@keyframes flame {
+	0%,
+	22%,
+	49%,
+	62%,
+	81%,
+	100% {
+		border-radius: 2px 14px 8px 8px/20px 20px 8px 8px;
+		box-shadow: 0 0 10px 4px hsl(41, 100%, 60%);
+	}
+	14%,
+	32%,
+	56%,
+	70%,
+	89% {
+		border-radius: 14px 2px 8px 8px/20px 20px 8px 8px;
+		box-shadow: 0 0 10px 2px hsl(41, 100%, 50%);
+	}
+}
+```

@@ -1,0 +1,153 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#91` [Cube Loader](https://100dayscss.com/days/91/)
+
+Cube Loader: This will be the result if you have too much time coding a loading animation.
+
+## CodePen
+
+> See the Pen [#91 CSS Challenge / Cube Loader](https://codepen.io/mulander/pen/qBLXjBw)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#91 CSS Challenge / Cube Loader"
+  src="https://codepen.io/mulander/embed/qBLXjBw?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+<div class="frame">
+	<div class="cube">
+		<div class="slice front"></div>
+		<div class="slice back"></div>
+		<div class="slice top"></div>
+		<div class="slice topFloat"></div>
+		<div class="slice bottom"></div>
+		<div class="slice left"></div>
+		<div class="slice right"></div>
+	</div>
+</div>
+```
+
+```css
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	font-family: "Open Sans", Helvetica, sans-serif;
+	background: #34495e;
+	perspective: 800px;
+}
+
+$l: 100px;
+$halfL: $l / 2;
+$dur: 2s;
+$wall: rgba(#000, 0.1);
+$highlight: blue;
+
+.cube {
+	position: absolute;
+	top: 150px;
+	left: 150px;
+	height: $l;
+	width: $l;
+	transform-origin: center center;
+	transform-style: preserve-3d;
+	transform: rotateX(-25deg) rotateY(45deg);
+	transition: all 0.5s ease-in-out;
+	&:hover {
+		transform: rotateX(-25deg) rotateY(45deg) translateY(-15px);
+	}
+	.slice {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		box-sizing: border-box;
+		border: 1px solid rgba(#fff, 0.1);
+		top: 0;
+		left: 0;
+		opacity: 0.8;
+		background: rgba(#000, 0.1);
+	}
+
+	.front {
+		transform: rotateY(0) translateZ($halfL);
+	}
+
+	.back {
+		transform: rotateY(180deg) translateZ($halfL);
+	}
+
+	.left {
+		transform: rotateY(-90deg) translateZ($halfL);
+	}
+
+	.right {
+		transform: rotateY(90deg) translateZ($halfL);
+	}
+
+	.top {
+		transform: rotateX(90deg) translateZ($halfL);
+	}
+	.topFloat {
+		transform: rotateX(90deg) translateZ(-1 * $halfL);
+		background: linear-gradient(225deg, rgba(#000,.6), $highlight);
+		background-size: 100% 200%;
+		animation: float-top $dur linear both alternate infinite,
+			float $dur / 2 ease both alternate infinite;
+	}
+
+	.bottom {
+		transform: rotateX(-90deg) translateZ($halfL);
+		background: $highlight;
+		box-shadow: -4px -4px 10px 10px rgba(0, 0, 0, 0.4);
+	}
+	.front,
+	.back,
+	.left,
+	.right {
+		background: linear-gradient(
+			to bottom,
+			$wall,
+			$wall 50%,
+			$highlight 50%,
+			$highlight
+		);
+		background-size: 100% 200%;
+		animation: float $dur linear both alternate infinite;
+	}
+}
+
+@keyframes float {
+	80%,
+	100% {
+		background-position: 0% 100%;
+	}
+}
+@keyframes float-top {
+	80%,
+	100% {
+		transform: rotateX(90deg) translateZ($halfL);
+	}
+}
+```

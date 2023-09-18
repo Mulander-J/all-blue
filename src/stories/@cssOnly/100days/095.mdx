@@ -1,0 +1,168 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#95` [Pig](https://100dayscss.com/days/95/)
+
+Pig: Innocent, cute and consists entirely of simple basic shapes.
+
+## CodePen
+
+> See the Pen [#95 CSS Challenge / Pig](https://codepen.io/mulander/pen/OJrxzEw)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#95 CSS Challenge / Pig"
+  src="https://codepen.io/mulander/embed/OJrxzEw?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Learn
+
+### Transform.Skew
+
+[`skew()`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/skew)
+
+The `skew()` CSS function defines a transformation that skews an element on the 2D plane. Its result is a `<transform-function>` data type.
+
+**Syntax**
+
+The `skew()` function is specified with either one or two values, which represent the amount of skewing to be applied in each direction. 
+
+If you only specify one value it is used for the x-axis and there will be no skewing on the y-axis.
+
+```yaml
+skew(ax)
+
+skew(ax, ay)
+```
+
+## Code
+
+```html
+<div class="frame">
+	<div class="center">
+		<div class="face">
+			<div class="reflect">
+				<div class="ear"></div>
+				<div class="eye"></div>
+			</div>
+			<div class="nose"></div>
+		</div>
+	</div>
+</div>
+```
+
+```css
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	background: #ffdcb5;
+}
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.face {
+	position: relative;
+	width: 160px;
+	height: 160px;
+	background: hsl(356, 86%, 77%);
+	border-radius: 50%;
+	.reflect {
+		position: absolute;
+		width: 80px;
+		height: 100%;
+		-webkit-box-reflect: right 0;
+		.ear {
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			background: hsl(356, 100%, 86%);
+			border: 7px solid hsl(356, 86%, 77%);
+			transform: skew(10deg, 10deg) translateY(11px);
+			border-radius: 10%;
+			clip-path: polygon(0 0, 50% 0, 0 50%);
+			box-shadow: inset 1px 0px 10px 2px hsl(356, 86%, 67%);
+		}
+		.eye {
+			position: absolute;
+			top: 30%;
+			right: 20%;
+			box-sizing: border-box;
+			height: 22px;
+			width: 22px;
+			border: 9px solid #fff;
+			background: #000;
+			border-radius: 50%;
+			animation: blink 15s ease both infinite;
+		}
+	}
+	.nose {
+		position: absolute;
+		height: 50px;
+		width: 60px;
+		top: 80px;
+		left: 50px;
+		background: hsl(356, 100%, 86%);
+		border-radius: 90px/80px;
+		box-shadow: 0px 4px 10px 2px hsl(356, 100%, 76%);
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			top: 15px;
+			left: 50%;
+			height: 12px;
+			width: 12px;
+			border-radius: 50%;
+			background: hsl(356, 51%, 60%);
+			box-shadow: inset 1px 0 4px 2px hsl(356, 51%, 40%);
+		}
+		&::before {
+			transform: translateX(-16px);
+		}
+		&::after {
+			transform: translateX(4px);
+		}
+	}
+}
+
+@keyframes blink {
+	0%,
+	23%,
+	25%,
+	65%,
+	67%,
+	89%,
+	91%,
+	100% {
+		transform: scaleY(1);
+	}
+
+	24%,
+	66%,
+	90% {
+		transform: scaleY(0);
+	}
+}
+```

@@ -1,0 +1,186 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#57` [Icosahedron](https://100dayscss.com/days/57/)
+
+Icosahedron: This time a slightly more complicated basic body as a 3D object. Can you figure out how the triangles are made?
+
+## CodePen
+
+> See the Pen [#57 CSS Challenge / Icosahedron](https://codepen.io/mulander/pen/dywVJrV)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#57 CSS Challenge / Icosahedron"
+  src="https://codepen.io/mulander/embed/dywVJrV?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Learn
+
+> Cloned from [rodzeymer](https://codepen.io/rodzeymer/pen/wvebLWY)
+
+- [Wiki.Icosahedron](https://en.wikipedia.org/wiki/Icosahedron)
+- [mathworld.Icosahedron](https://mathworld.wolfram.com/Icosahedron.html)
+
+## Code
+
+```html
+// pug
+
+.frame: .center: .icosahedron
+	- for (var i = 1; i <= 20; i++)
+		div(class='side side-' + i)
+```
+
+```css
+$theme: #fff;
+$side: 70px;
+$sqrt3: 1.732;
+$tilt: 52.62deg; // asin(tan(54deg)/sqrt(3))
+$capheight: -1.051 * $side; // sqrt(3-tan(54deg)^2 )
+$triheight: $side * $sqrt3;
+$vshift: $capheight + $triheight / 2;
+
+$innerradius: 1.376 * $side; // tan(54deg)
+$outerradius: 1.701 * $side; // 1/cos(54deg)
+$sidetilt: 10.81deg; // asin( (sec(54deg)-tan(54deg))/sqrt(3) )
+$sideheight: $outerradius; // sqrt(3-(sec(54deg)-tan(54deg))^2)
+$vshift2: $sideheight + $triheight - $vshift;
+
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	background: #2c3e50;
+}
+
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	perspective: 1000px;
+}
+
+.icosahedron {
+	position: relative;
+	width: $side * 2;
+	height: $side * 2;
+	animation: spin 16s infinite linear;
+	transform-style: preserve-3d;
+
+	.side {
+		position: absolute;
+		left: 0;
+		bottom: 50%;
+		border-bottom: $triheight solid rgba($theme, 1);
+		border-left: $side solid transparent;
+		border-right: $side solid transparent;
+		transform-origin: 50% 0%;
+		transition-duration: 0.9s;
+
+		&:nth-child(2n + 2) {
+			border-bottom-color: rgba($theme, 0.4);
+		}
+
+		&:nth-child(4n + 4) {
+			border-bottom-color: rgba($theme, 0.6);
+		}
+
+		&:nth-child(7n + 7) {
+			border-bottom-color: rgba($theme, 0.8);
+		}
+
+		&:nth-child(8n + 8) {
+			border-bottom-color: rgba($theme, 0.6);
+		}
+	}
+
+	@for $i from 1 through 5 {
+		// top
+		.side-#{$i} {
+			transform: translateY($vshift) rotateY(#{$i * 72deg}) rotateX($tilt);
+		}
+		&:hover .side-#{$i} {
+			transform: translateY(-($vshift + 95)) rotateY(#{$i * 72deg}) rotateX($tilt);
+		}
+	}
+	@for $i from 6 through 10 {
+		// bottom
+		.side-#{$i} {
+			transform: translateY($vshift2)
+				rotateY(#{$i * 72deg + 36deg})
+				rotateX(#{180deg - $tilt});
+		}
+		&:hover .side-#{$i} {
+			transform: translateY(($vshift2 + 66))
+				rotateY(#{$i * 72deg + 36deg})
+				rotateX(#{180deg - $tilt});
+		}
+	}
+	@for $i from 11 through 15 {
+		// bottom sides
+		.side-#{$i} {
+			transform: translateY(#{$triheight / 2})
+				rotateY(#{$i * 72deg + 36deg})
+				translateZ($outerradius)
+				rotateX(-$sidetilt);
+		}
+
+		&:hover .side-#{$i} {
+			transform: translateY(#{($triheight + 95px) / 2})
+				rotateY(#{$i * 72deg + 36deg})
+				translateZ($outerradius)
+				rotateX(-$sidetilt);
+		}
+	}
+	@for $i from 16 through 20 {
+		// top sides
+		.side-#{$i} {
+			transform: translateY(#{$triheight / 2 + $sideheight})
+				rotateY(#{$i * 72deg})
+				rotateZ(180deg)
+				translateZ($outerradius)
+				rotateX(-$sidetilt);
+		}
+
+		&:hover .side-#{$i} {
+			transform: translateY(#{($triheight - 100px) / 2 + $sideheight})
+				rotateY(#{$i * 72deg})
+				rotateZ(180deg)
+				translateZ($outerradius)
+				rotateX(-$sidetilt);
+		}
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotateX(360deg) rotateY(0deg) rotateZ(360deg);
+	}
+	50% {
+		transform: rotateX(0deg) rotateY(720deg) rotateZ(0deg);
+	}
+	100% {
+		transform: rotateX(360deg) rotateY(0deg) rotateZ(360deg);
+	}
+}
+```

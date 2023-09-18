@@ -1,0 +1,130 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#96` [Jumping Square](https://100dayscss.com/days/96/)
+
+Jumping Square: Squashed and stretched, this is how objects in motion should look like.
+
+## CodePen
+
+> See the Pen [#96 CSS Challenge / Jumping Square](https://codepen.io/mulander/pen/jOXGxPp)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#96 CSS Challenge / Jumping Square"
+  src="https://codepen.io/mulander/embed/jOXGxPp?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Learn
+
+When dealing with animations, if the keyframes are complex, consider splitting the animation
+
+## Code
+
+```html
+<div class="frame">
+	<div class="center">
+		<div class="translate">
+			<div class="rotate">
+				<div class="cube"></div>
+			</div>
+		</div>
+		<div class="shadow"></div>
+	</div>
+</div>
+```
+
+```css
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	background: skyblue;
+}
+
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.translate {
+	animation: translate 0.8s ease-in-out alternate both infinite;
+}
+
+.rotate {
+	animation: rotate 1.6s linear both infinite;
+}
+
+.cube {
+	width: 100px;
+	height: 100px;
+	background: #fff;
+	transform-origin: center center;
+	animation: scale 1.6s ease-in-out both infinite;
+}
+.shadow {
+	position: absolute;
+	width: 80%;
+	left: 10%;
+	height: 2px;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 0px 8px rgba(0, 0, 0, 0.2);
+	animation: scale 1.6s ease-in-out both infinite;
+}
+
+@keyframes translate {
+	from {
+		transform: translateY(-100px);
+	}
+	to {
+		transform: translateY(0px);
+	}
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(-135deg);
+	}
+	20%,
+	93.66% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(45deg);
+	}
+}
+
+@keyframes scale {
+	0%,
+	4% {
+		transform: scale(1);
+	}
+	45% {
+		transform: scale(1.8, 0.4);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+```

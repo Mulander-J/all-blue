@@ -1,0 +1,154 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta />
+
+# `#99` [Circle-Square](https://100dayscss.com/days/99/)
+
+Circle-Square: Click me for a moment of joy and excitement
+
+## CodePen
+
+> See the Pen [#99 CSS Challenge / Circle-Square](https://codepen.io/mulander/pen/vYveazL)
+by Mulander ([@mulander](https://codepen.io/mulander))
+on [CodePen](https://codepen.io).
+
+<iframe
+  height="500"
+  className="w-full my-10 bg-gray-200"
+  scrolling="no"
+  title="#99 CSS Challenge / Circle-Square"
+  src="https://codepen.io/mulander/embed/vYveazL?default-tab=html%2Cresult"
+  frameBorder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowFullScreen={true}
+>
+
+</iframe>
+
+## Code
+
+```html
+// pug
+
+.frame
+	input#checker(type="checkbox", name="check")
+	label.dot(for="checker"): .ring
+	.bg
+	.lines
+		- for(let i = 0; i < 20; i++)
+			.line
+```
+
+```css
+$lines: 20;
+
+.frame {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 400px;
+	margin-top: -200px;
+	margin-left: -200px;
+	border-radius: 2px;
+	box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	background: hsl(282, 44%, 47%);
+}
+
+input[type="checkbox"] {
+	display: none;
+}
+
+.dot {
+	position: absolute;
+	display: block;
+	z-index: 2;
+	top: 180px;
+	left: 180px;
+	height: 40px;
+	width: 40px;
+	background: #fff;
+	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+	border-radius: 50%;
+	cursor: pointer;
+	.ring {
+		position: absolute;
+		top: -1px;
+		left: -1px;
+		height: 100%;
+		width: 100%;
+		border-radius: 50%;
+		border: 2px solid #fff;
+		transform: scale(0);
+		opacity: 1;
+	}
+}
+
+.lines {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	top: 50px;
+	left: 50px;
+	transform: scale(0);
+
+	.line {
+		position: absolute;
+		height: 26px;
+		width: 4px;
+		background: #fff;
+		top: 137px;
+		left: 148px;
+		@for $i from 1 through $lines {
+			&:nth-child(#{$i}) {
+				transform: rotate(360deg / $lines * ($i - 1)) translateY(-120px);
+			}
+		}
+	}
+}
+
+.bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 400px;
+	height: 400px;
+	transform-origin: 200px 200px;
+	background: hsl(282, 50%, 67%);
+	border-radius: 50%;
+	transform: scale(0);
+}
+
+.dot,
+.bg {
+	transition: all 0.6s ease-in-out;
+}
+
+.ring,
+.lines {
+	transition: opacity 0.3s ease-in, transform 0.6s 0.15s ease-in;
+}
+
+#checker:checked ~ .dot {
+	border-radius: 0;
+	transform: rotate(180deg) scale(1.1);
+}
+
+#checker:checked ~ .dot .ring {
+	opacity: 0;
+	transform: scale(2);
+	transition: transform 0.6s ease-out, opacity 0.3s ease-out 0.3s;
+}
+
+#checker:checked ~ .lines {
+	opacity: 0;
+	transform: scale(0.75);
+	transition: transform 0.6s ease-out, opacity 0.3s ease-out 0.3s;
+}
+
+#checker:checked ~ .bg {
+	transform: scale(4);
+}
+```
